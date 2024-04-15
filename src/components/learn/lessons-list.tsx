@@ -8,7 +8,6 @@ export default function LessonsList({ lessons }: { lessons: Lesson[] }) {
             {lessons.map((lesson) => (
                 <LessonButton key={lesson.id} {...lesson} lessonsCount={lessons.length} />
             ))}
-            <div></div>
         </main>
     );
 }
