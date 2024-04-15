@@ -12,9 +12,6 @@ export default async function layout({ children }: { children: ReactNode }) {
         },
     });
 
-
-    console.log(userProgress)
-
     if (!userProgress) return redirect("/courses")
 
     return (

@@ -7,6 +7,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 
 import "./globals.css";
 import { Toaster } from "sonner";
+import StoreProvider from "@/components/providers/store-provider";
 
 const font = Open_Sans({ subsets: ["latin"] });
 
@@ -23,12 +24,14 @@ export default function RootLayout({
     return (
         <ClerkProvider>
             <html lang="en">
-                <body className={`${font.className}`}>
-                    <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
-                        {children}
-                    </ThemeProvider>
-                </body>
-                <Toaster richColors/>
+                <StoreProvider>
+                    <body className={`${font.className}`}>
+                        <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+                            {children}
+                        </ThemeProvider>
+                    </body>
+                </StoreProvider>
+                <Toaster richColors />
             </html>
         </ClerkProvider>
     );
