@@ -1,0 +1,82 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+// Define the course model
+model Course {
+  id           String            @id @default(uuid())
+  title        String
+  imageSrc     String
+  units        Unit[]
+  UserProgress UserProgress[]
+}
+
+// Define the unit model
+model Unit {
+  id          String      @id @default(uuid())
+  title       String
+  description String
+  order       Int
+  courseId    String
+  course      Course   @relation(fields: [courseId], references: [id])
+  lessons     Lesson[]
+}
+
+model Lesson {
+  id         String         @id @default(uuid())
+  title      String
+  order      Int
+  unitId     String
+  unit       Unit        @relation(fields: [unitId], references: [id])
+  challenges Challenge[]
+}
+
+model Challenge {
+  id         String                 @id @default(uuid())
+  type       ChallengeType
+  question   String
+  order      Int
+  lessonId   String
+  lesson     Lesson              @relation(fields: [lessonId], references: [id])
+  options    ChallengeOption[]
+  progresses ChallengeProgress[]
+}
+
+model ChallengeOption {
+  id          String       @id @default(uuid())
+  text        String
+  correct     Boolean
+  imageSrc    String?
+  audioSrc    String?
+  challengeId String
+  challenge   Challenge @relation(fields: [challengeId], references: [id])
+}
+
+model ChallengeProgress {
+  id          String       @id @default(uuid())
+  userId      String
+  completed   Boolean   @default(false)
+  challengeId String
+  challenge   Challenge @relation(fields: [challengeId], references: [id])
+}
+
+model UserProgress {
+  userId         String  @id
+  userName       String
+  userImageSrc   String
+  hearts         Int     @default(5)
+  points         Int     @default(0)
+  activeCourseId String?
+  activeCourse   Course? @relation(fields: [activeCourseId], references: [id])
+}
+
+enum ChallengeType {
+  SELECT
+  ASSIST
+}
