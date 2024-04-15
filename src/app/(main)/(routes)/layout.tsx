@@ -1,4 +1,6 @@
 import Sidebar from "@/components/learn/sidebar";
+import UserDataNav from "@/components/learn/user-data-nav";
+import UserProgerssProvider from "@/components/providers/user-progress-provider";
 import { prisma } from "@/lib/db";
 import { currentUser } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
@@ -12,12 +14,14 @@ export default async function layout({ children }: { children: ReactNode }) {
         },
     });
 
-    if (!userProgress) return redirect("/courses")
+    if (!userProgress) return redirect("/courses");
 
     return (
         <main className="flex items-start">
             <Sidebar />
+            <UserProgerssProvider userProgress={userProgress} />
             {children}
+            <UserDataNav />
         </main>
     );
 }

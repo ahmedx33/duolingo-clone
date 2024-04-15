@@ -14,7 +14,7 @@ export default async function SectionGroup() {
     });
 
     return (
-        <section className="py-12 px-36 w-full h-full flex flex-col">
+        <section className="w-full h-full flex flex-col items-center p-[60px]">
             {units.map((unit) => (
                 <>
                     <Unit key={unit.title} {...unit} lessons={unit.lessons} />

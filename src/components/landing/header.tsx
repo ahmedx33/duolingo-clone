@@ -11,6 +11,7 @@ export default function Header() {
             <ClerkLoading>
                 <Spinner />
             </ClerkLoading>
+
             <ClerkLoaded>
                 <SignInButton>
                     <UserButton afterSignOutUrl="/" />

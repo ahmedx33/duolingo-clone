@@ -1,3 +1,6 @@
+"use client"
+
+import { useRouter } from "next/navigation";
 import { PiSpinner } from "react-icons/pi";
 
 export default function Spinner() {
