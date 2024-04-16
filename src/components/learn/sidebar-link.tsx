@@ -17,7 +17,7 @@ export default function SidebarLink({ title, path, src }: SiderbarLinkProps) {
         <Link
             href={path}
             className={cn(
-                " bg-transparent p-3 px-2 rounded-xl w-full text-[#777777] uppercase font-bold text-[1rem] flex items-center gap-x-3 max-lg:flex max-lg:items-center max-lg:justify-center",
+                " bg-transparent p-3 px-2 rounded-xl w-full text-[#777777] uppercase font-bold text-[1rem] flex items-center gap-x-3 max-lg:flex max-lg:items-center max-lg:justify-center hover:bg-[#F1F5F9]",
                 pathname.includes(path) ? "text-[#1cb0f6] bg-[#DDF4FF] border-[#84D8FF] border-2" : ""
             )}
         >

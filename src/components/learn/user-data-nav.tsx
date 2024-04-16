@@ -6,6 +6,7 @@ import { TiHeartFullOutline } from "react-icons/ti";
 import { useSelector } from "react-redux";
 import { RootState } from "@/lib/store";
 import { Course, UserProgress } from "@prisma/client";
+import Link from "next/link";
 
 interface HeaderProps {
     courseImageSrc: string;
@@ -33,16 +34,16 @@ export default function UserDataNav({
 function Header({ courseImageSrc, hearts, points }: HeaderProps) {
     return (
         <section className="flex  items-center justify-around">
-            <section className="w-fit h-fit overflow-hidden rounded-lg">
-                <Image src={courseImageSrc} alt="course" width={30} height={30}/>
-            </section>
-            <section className="flex items-center">
+            <Link href="/courses" className="w-fit h-fit overflow-hidden rounded-md">
+                <Image src={courseImageSrc} alt="course" width={30} height={30} />
+            </Link>
+            <section className="flex items-center gap-x-2">
                 <span>
                     <RiLightbulbFlashFill color="#1CB0F6" size={25} />
                 </span>
                 <span className="text-[#1CB0F6]">{points}</span>
             </section>
-            <section className="flex items-center">
+            <section className="flex items-center gap-x-2">
                 <span>
                     <TiHeartFullOutline color="#FF4B4B" size={25} />
                 </span>

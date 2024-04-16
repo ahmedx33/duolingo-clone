@@ -1,15 +1,29 @@
 "use client";
-import Image from "next/image";
+
 import { Button } from "../ui/button";
+
 import { Course as CourseType } from "@prisma/client";
-import axios from "axios";
+
+import Image from "next/image";
 import { useState } from "react";
-import { toast } from "sonner";
 import { useRouter } from "next/navigation";
+
+import { useSelector } from "react-redux";
+import { RootState } from "@/lib/store";
+
+import axios from "axios";
+
+import { FaCheck } from "react-icons/fa6";
 
 export default function Course({ id, title, imageSrc }: CourseType) {
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const router = useRouter();
+    const currentUser = useSelector((state: RootState) => state.userProgress.value)
+    const isActive = currentUser.activeCourseId === id
+
+    console.log(currentUser)
+    console.log(isActive)
+
     const createNewProgress = async () => {
         try {
             setIsLoading(true);
@@ -23,7 +37,10 @@ export default function Course({ id, title, imageSrc }: CourseType) {
     };
 
     return (
-        <Button disabled={isLoading} onClick={createNewProgress} className="w-[200px] h-[210px] flex flex-col items-center justify-center">
+        <Button disabled={isLoading} onClick={createNewProgress} className="w-[200px] h-[210px] flex flex-col items-center justify-center relative">
+            {isActive && <div className="absolute top-[0.7rem] right-[0.7rem] bg-[#58A700] text-white p-1 rounded-md">
+                <FaCheck size={20}/>
+            </div>}
             <div className="rounded-xl overflow-hidden mb-7">
                 <Image src={imageSrc} alt="flag" width={100} height={100} />
             </div>
