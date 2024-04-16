@@ -1,6 +1,6 @@
 "use client";
 
-import { mainUser } from "@/lib/features/user/user-progress";
+import { mainUser } from "@/lib/features/user/user-progress-slice";
 import { UserProgress } from "@prisma/client";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
@@ -22,6 +22,6 @@ export default function UserProgerssProvider({ userProgress }: UserProgerssProvi
             setIsMount(false);
         };
     }, [dispatch, isMount, userProgress]);
-    
+
     return null;
 }

@@ -17,7 +17,7 @@ export default async function layout({ children }: { children: ReactNode }) {
     if (!userProgress) return redirect("/courses");
 
     return (
-        <main className="flex items-start">
+        <main className="flex items-start overflow-hidden">
             <Sidebar />
             <UserProgerssProvider userProgress={userProgress} />
             {children}
