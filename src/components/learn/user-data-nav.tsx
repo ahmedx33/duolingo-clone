@@ -1,40 +1,52 @@
-"use client"
+"use client";
 
 import Image from "next/image";
 import { RiLightbulbFlashFill } from "react-icons/ri";
-import { FaHeart } from "react-icons/fa";
+import { TiHeartFullOutline } from "react-icons/ti";
 import { useSelector } from "react-redux";
 import { RootState } from "@/lib/store";
+import { Course, UserProgress } from "@prisma/client";
 
-export default function UserDataNav() {
+interface HeaderProps {
+    courseImageSrc: string;
+    hearts: number;
+    points: number;
+}
+
+export default function UserDataNav({
+    userId,
+    userName,
+    userImageSrc,
+    hearts,
+    points,
+    activeCourse,
+}: UserProgress & {
+    activeCourse: Course;
+}) {
     return (
         <nav className="min-w-[500px] max-w-[500px] h-screen py-9 pr-[12rem]">
-            <Header />
+            <Header courseImageSrc={activeCourse.imageSrc} hearts={hearts} points={points} />
         </nav>
     );
 }
 
-function Header() {
-    const userProgress = useSelector((state: RootState) => state.userProgress)
-
+function Header({ courseImageSrc, hearts, points }: HeaderProps) {
     return (
         <section className="flex  items-center justify-around">
-            <section>lang</section>
+            <section className="w-fit h-fit overflow-hidden rounded-lg">
+                <Image src={courseImageSrc} alt="course" width={30} height={30}/>
+            </section>
             <section className="flex items-center">
                 <span>
                     <RiLightbulbFlashFill color="#1CB0F6" size={25} />
                 </span>
-                <span>
-                    {userProgress.value.points}
-                </span>
+                <span className="text-[#1CB0F6]">{points}</span>
             </section>
             <section className="flex items-center">
                 <span>
-                    <FaHeart color="#FF4B4B" size={25} />
+                    <TiHeartFullOutline color="#FF4B4B" size={25} />
                 </span>
-                <span>
-                    {userProgress.value.hearts}
-                </span>
+                <span className="text-[#FF4B4B]">{hearts}</span>
             </section>
         </section>
     );
