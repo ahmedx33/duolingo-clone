@@ -5,35 +5,56 @@ import { CircularProgressbarWithChildren } from "react-circular-progressbar";
 import { FaStar, FaCrown } from "react-icons/fa"; // Fixed import statement for FaCrown
 import { Button } from "../ui/button";
 import { cn } from "@/lib/utils";
-import { Lesson } from "@prisma/client";
+import { Challenge, Lesson } from "@prisma/client";
 import Link from "next/link";
+import axios from "axios";
+import { useSelector } from "react-redux";
+import { RootState } from "@/lib/store";
 
 export default function LessonButton({
     id,
-    title,
     order,
     lessonsCount,
+    challenges,
 }: Lesson & {
     lessonsCount?: number;
+    challenges: Challenge[];
 }) {
     const icon = order === lessonsCount ? <FaCrown size={30} /> : <FaStar size={30} />;
     const marginLeft = order % 2 === 0 ? 50 : 0;
-    const currentLesson = order === 1
-    const isLocked = order !== 1
+    const currentLesson = order === 1;
+    const isLocked = order !== 1;
+    const challenge = challenges.find((challenge) => challenge.lessonId === id);
+    const currentUser = useSelector((state: RootState) => state.userProgress.value);
 
-    console.log(marginLeft);
+    const addChallengeProgress = async () => {
+        try {
+            const res = await axios.post("/api/challengeProgress/", {
+                challengeId: challenge?.id,
+                userId: currentUser.userId,
+            });
+        } catch (err) {
+            console.error(err);
+        }
+    };
 
     return (
-        <Link href={`/lesson/`} as={`/lesson/${id}`}
+        <Link
+            onClick={addChallengeProgress}
+            href={`/lesson/`}
+            as={`/lesson/${id}`}
             className={cn("w-[100px] h-[100px] relative")}
             style={{
                 marginLeft,
             }}
         >
-           {currentLesson && <div className="absolute uppercase z-30 bg-white border-[#E5E5E5] border-2 py-2 px-4 rounded-lg -top-5 left-3 w-fit flex items-center justify-center animate-bounce text-[#58CC02] font-bold cursor-pointer">
-                Start
-                <div className="absolute -bottom-[20px] border-[10px] border-transparent border-t-white"></div>
-            </div> }
+            {currentLesson && (
+                <div className="absolute uppercase z-30 bg-white border-[#E5E5E5] border-2 py-2 px-4 rounded-lg -top-5 left-3 w-fit flex items-center justify-center animate-bounce text-[#58CC02] font-bold cursor-pointer">
+                    Start
+                    <div className="absolute -bottom-[20px] border-[10px] border-transparent border-t-white"></div>
+                </div>
+            )}
+
             <CircularProgressbarWithChildren
                 value={0}
                 styles={{

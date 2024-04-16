@@ -8,8 +8,6 @@ export const POST = async (req: NextRequest) => {
 
         const user = await currentUser();
 
-        console.log(user)
-
         if (!currentUser) return new NextResponse("Unauthorized", { status: 401 });
 
         const { courseId } = await req.json()
@@ -23,7 +21,7 @@ export const POST = async (req: NextRequest) => {
             }
         });
 
-        return Response.json(newUserProgress, { status: 200 });
+        return NextResponse.json(newUserProgress, { status: 200 });
     } catch (err) {
         return new NextResponse(`${err}`, { status: 400 });
     }
