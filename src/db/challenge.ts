@@ -8,7 +8,8 @@ export const getChallenges = unstable_cache(cache(async ({ lessonId }: { lessonI
     const data = await prisma.challenge.findMany({
         where: {
             lessonId
-        }
+        },
+        
     })
 
     return data
@@ -19,7 +20,7 @@ export const getChallengeOption = unstable_cache(cache(async ({ challengeId }: {
     const data = await prisma.challengeOption.findMany({
         where: {
             challengeId
-        }
+        },
     })
 
     return data

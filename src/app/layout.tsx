@@ -1,6 +1,6 @@
 import { Metadata } from "next";
 
-import { Open_Sans } from "next/font/google";
+import { Nunito } from "next/font/google";
 
 import { ClerkProvider } from "@clerk/nextjs";
 import { ThemeProvider } from "@/components/theme-provider";
@@ -9,7 +9,7 @@ import "./globals.css";
 import { Toaster } from "sonner";
 import StoreProvider from "@/components/providers/store-provider";
 
-const font = Open_Sans({ subsets: ["latin"] });
+const font = Nunito({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
     title: "Duolingo Clone",

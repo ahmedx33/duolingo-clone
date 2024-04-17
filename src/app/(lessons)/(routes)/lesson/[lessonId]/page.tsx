@@ -1,7 +1,8 @@
-import Challenge from "@/components/challenge/challenge";
-import ChallengesList from "@/components/challenge/challenges-list";
-import ChallengeHeader from "@/components/challenge/header";
 import { getChallenges } from "@/db/challenge";
+import { lazy } from "react";
+
+const ChallengesList = lazy(() => import("@/components/challenge/challenges-list"));
+const ChallengeHeader = lazy(() => import("@/components/challenge/header"));
 
 export default async function Page({ params: { lessonId } }: { params: { lessonId: string } }) {
     const challenges = await getChallenges({ lessonId });
@@ -9,7 +10,7 @@ export default async function Page({ params: { lessonId } }: { params: { lessonI
     return (
         <main className="py-14 h-screen">
             <ChallengeHeader />
-           <ChallengesList challenges={challenges}/>
+            <ChallengesList challenges={challenges} />
         </main>
     );
 }

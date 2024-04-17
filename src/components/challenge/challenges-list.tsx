@@ -1,6 +1,5 @@
-
 import { Challenge as ChallengeType } from "@prisma/client";
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import { Button } from "../ui/button";
 import Challenge from "./challenge";
 
@@ -9,7 +8,6 @@ interface ChallengesListProps {
 }
 
 export default function ChallengesList({ challenges }: ChallengesListProps) {
-    
     return (
         <main className="mx-auto w-fit mt-[10rem] ">
             <Challenge {...challenges[0]} />
