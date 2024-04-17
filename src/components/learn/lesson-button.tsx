@@ -37,7 +37,7 @@ export default function LessonButton({
             }}
         >
             {currentLesson && (
-                <div className="absolute uppercase z-30 bg-white border-[#E5E5E5] border-2 py-2 px-4 rounded-lg -top-5 left-3 w-fit flex items-center justify-center animate-bounce text-[#58CC02] font-bold cursor-pointer">
+                <div className="absolute uppercase z-30 bg-white border-[#E5E5E5] border-2 py-2 px-4 rounded-lg -top-5 left-[0.4rem] w-fit flex items-center justify-center animate-bounce text-[#58CC02] font-bold cursor-pointer">
                     Start
                     <div className="absolute -bottom-[20px] border-[10px] border-transparent border-t-white"></div>
                 </div>
