@@ -1,7 +1,7 @@
 import Sidebar from "@/components/learn/sidebar";
 import UserDataNav from "@/components/learn/user-data-nav";
 import UserProgerssProvider from "@/components/providers/user-progress-provider";
-import { prisma } from "@/lib/db";
+import { prisma } from "@/db/db";
 import { currentUser } from "@clerk/nextjs";
 import { Course } from "@prisma/client";
 import { redirect } from "next/navigation";
@@ -16,10 +16,10 @@ export default async function layout({ children }: { children: ReactNode }) {
     });
 
     const activeCourse = await prisma.course.findUnique({
-        where:{
-            id: userProgress?.activeCourseId as string
-        }
-    })
+        where: {
+            id: userProgress?.activeCourseId as string,
+        },
+    });
 
     if (!userProgress) return redirect("/courses");
 
@@ -28,7 +28,7 @@ export default async function layout({ children }: { children: ReactNode }) {
             <Sidebar />
             <UserProgerssProvider userProgress={userProgress} />
             {children}
-            <UserDataNav {...userProgress} activeCourse={activeCourse as Course}/>
+            <UserDataNav {...userProgress} activeCourse={activeCourse as Course} />
         </main>
     );
 }

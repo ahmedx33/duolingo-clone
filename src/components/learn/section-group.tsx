@@ -1,15 +1,14 @@
-
 import Unit from "@/components/learn/unit";
-import { prisma } from "@/lib/db";
+import { prisma } from "@/db/db";
 
 export default async function SectionGroup() {
     const units = await prisma.unit.findMany({
         include: {
             lessons: {
                 include: {
-                    challenges: true
-                }
-            }
+                    challenges: true,
+                },
+            },
         },
     });
 

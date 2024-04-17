@@ -1,4 +1,4 @@
-import { prisma } from "@/lib/db";
+import { prisma } from "@/db/db";
 import Course from "./course";
 
 export default async function CoursesList() {
