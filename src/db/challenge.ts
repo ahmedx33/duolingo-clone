@@ -16,12 +16,8 @@ export const getChallenges = unstable_cache(cache(async ({ lessonId }: { lessonI
 }), ["challenges"])
 
 
-export const getChallengeOption = unstable_cache(cache(async ({ challengeId }: { challengeId: string }) => {
-    const data = await prisma.challengeOption.findMany({
-        where: {
-            challengeId
-        },
-    })
+export const getChallengeOption = unstable_cache(cache(async () => {
+    const data = await prisma.challengeOption.findMany()
 
     return data
 }))

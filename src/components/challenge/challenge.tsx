@@ -2,37 +2,24 @@
 import { getChallengeOption } from "@/db/challenge";
 import { ChallengeOption, Challenge as ChallengeType } from "@prisma/client";
 import { Card } from "./card";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import axios from "axios";
 
-export default function Challenge({ id, type, question, order }: ChallengeType) {
-    const [challengeOptions, setChallengeOptions] = useState<ChallengeOption[]>();
+export default function Challenge({
+    id,
+    type,
+    question,
+    order,
+    challengeOptions,
+}: ChallengeType & {
+    challengeOptions: ChallengeOption[];
+}) {
     const [selected, setSelected] = useState<string>();
+    const getCurrentChallengeOptions = useMemo(() => {
+        return challengeOptions.filter((challengeOption) => challengeOption.challengeId === id);
+    }, [challengeOptions, id]);
 
-    useEffect(() => {
-        const abortController = new AbortController();
-        const signal = abortController.signal;
-
-        const fetchChallengeOptions = async () => {
-            try {
-                const { data } = await axios.get(`/api/challengeOption/${id}`, { signal });
-
-                console.log(data);
-                setChallengeOptions(data);
-            } catch (err) {
-                if (axios.isCancel(err)) {
-                    console.error(err);
-                    console.log("fetch aborted");
-                }
-            }
-        };
-
-        fetchChallengeOptions();
-
-        return () => {
-            abortController.abort();
-        };
-    }, [id]);
+    console.log(getCurrentChallengeOptions);
 
     return (
         <div>

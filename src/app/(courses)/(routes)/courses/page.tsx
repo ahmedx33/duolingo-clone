@@ -1,3 +1,4 @@
+
 import CoursesList from "@/components/courses/courses-list";
 import Header from "@/components/landing/header";
 
