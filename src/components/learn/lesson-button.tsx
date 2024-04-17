@@ -24,23 +24,11 @@ export default function LessonButton({
     const marginLeft = order % 2 === 0 ? 50 : 0;
     const currentLesson = order === 1;
     const isLocked = order !== 1;
-    const challenge = challenges.find((challenge) => challenge.lessonId === id);
-    const currentUser = useSelector((state: RootState) => state.userProgress.value);
+    
 
-    const addChallengeProgress = async () => {
-        try {
-            const res = await axios.post("/api/challengeProgress/", {
-                challengeId: challenge?.id,
-                userId: currentUser.userId,
-            });
-        } catch (err) {
-            console.error(err);
-        }
-    };
 
     return (
         <Link
-            onClick={addChallengeProgress}
             href={`/lesson/`}
             as={`/lesson/${id}`}
             className={cn("w-[100px] h-[100px] relative")}
