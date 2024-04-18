@@ -10,6 +10,7 @@ import { RootState } from "@/lib/store";
 import { IoMdClose, IoMdCheckmark } from "react-icons/io";
 import axios from "axios";
 import { cn } from "@/lib/utils";
+import { useAudio } from "react-use";
 
 export default function Challenge({
     id,
@@ -30,9 +31,15 @@ export default function Challenge({
     const [selectedCardStatus, setSelectedCardStatus] = useState<boolean>();
     const [isCorrect, setIsCorrect] = useState<boolean>();
     const [isLoading, setIsLoading] = useState<boolean>(false);
+    const [correct, _, correctControls] = useAudio({
+        src: "/sounds/duolingo-correct.mp3",
+    });
+    const [wrong, s, wrongControls] = useAudio({
+        src: "/sounds/duolingo-wrong.mp3",
+    });
     const userProgress = useSelector((state: RootState) => state.userProgress.value);
     const isDisabled = selected === undefined;
-
+    console.log(isCorrect);
     const getCurrentChallengeOptions = useMemo(() => {
         return challengeOptions.filter((challengeOption) => challengeOption.challengeId === id);
     }, [challengeOptions, id]);
@@ -41,8 +48,9 @@ export default function Challenge({
         if (selectedCardStatus === true) {
             setIsLoading(true);
             try {
-                if (nextActiveChallenge === lastChallengeIndex) return;
-                const res = await axios.post("/api/challengeProgress/", { userId: userProgress.userId, challengeId: id, completed: true });
+                // if (nextActiveChallenge === lastChallengeIndex) return;
+                // const res = await axios.post("/api/challengeProgress/", { userId: userProgress.userId, challengeId: id, completed: true });
+                correctControls.play();
                 setIsCorrect(true);
                 setIsLoading(false);
             } catch (err) {
@@ -51,16 +59,17 @@ export default function Challenge({
         } else {
             setIsLoading(true);
             setTimeout(() => {
+                wrongControls.play();
                 setIsLoading(false);
                 setIsCorrect(false);
             }, 1500);
         }
     };
 
-
-
     return (
         <div>
+            {correct}
+            {wrong}
             <h1 className="mb-[27px] text-[2rem] font-semibold text-[#404040]">{question}</h1>
 
             <div className="flex items-center gap-2">
@@ -85,7 +94,7 @@ export default function Challenge({
 
                 {isCorrect === true && (
                     <div className="w-full h-[150px] fixed bottom-0 left-0 z-50 border-green-300 bg-[#D7FFB8] text-green-300 flex items-center justify-around px-40">
-                         <div className="flex items-center gap-x-3 text-[#58A700]">
+                        <div className="flex items-center gap-x-3 text-[#58A700]">
                             <div className="w-fit bg-white rounded-full p-3 ">
                                 <IoMdCheckmark size={60} />
                             </div>
