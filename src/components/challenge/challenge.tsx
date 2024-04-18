@@ -49,7 +49,7 @@ export default function Challenge({
             setIsLoading(true);
             try {
                 // if (nextActiveChallenge === lastChallengeIndex) return;
-                // const res = await axios.post("/api/challengeProgress/", { userId: userProgress.userId, challengeId: id, completed: true });
+                const res = await axios.post("/api/challengeProgress/", { userId: userProgress.userId, challengeId: id, completed: true });
                 correctControls.play();
                 setIsCorrect(true);
                 setIsLoading(false);
