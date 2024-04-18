@@ -20,7 +20,7 @@ export default function ChallengeHeader() {
                 color="#64748A"
                 className="cursor-pointer"
             />
-            <Progress value={40} className="h-4" customColor="bg-[#22C55E]" />
+            <Progress value={0} className="h-4" customColor="bg-[#22C55E]" />
             <div className="flex items-center gap-x-2">
                 <TiHeartFullOutline color="#FF4B4B" size={30} />
                 <span className="text-[#FF4B4B] font-semibold">{userProgress.hearts}</span>

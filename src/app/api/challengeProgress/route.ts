@@ -6,13 +6,14 @@ import { NextRequest, NextResponse } from "next/server"
 export const POST = async (req: NextRequest) => {
     try {
 
-        const { userId, challengeId } = await req.json()
+        const { userId, challengeId, completed } = await req.json()
         if (!userId) return new NextResponse("Unauthorized", { status: 401 })
 
         const challengeProgress = await prisma.challengeProgress.create({
             data: {
                 userId,
                 challengeId,
+                completed
             }
         })
 
