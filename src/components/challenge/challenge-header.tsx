@@ -9,7 +9,7 @@ import { RootState } from "@/lib/store";
 export default function ChallengeHeader() {
     const userProgress = useSelector((state: RootState) => state.userProgress.value);
     const router = useRouter();
-    console.log(userProgress);
+
     return (
         <nav className="flex items-center w-[800px] mx-auto gap-x-5">
             <IoClose

@@ -26,7 +26,6 @@ export default async function layout({ children }: { children: ReactNode }) {
     return (
         <main className="flex items-start overflow-hidden">
             <Sidebar />
-            <UserProgerssProvider userProgress={userProgress} />
             {children}
             <UserDataNav {...userProgress} activeCourse={activeCourse as Course} />
         </main>
