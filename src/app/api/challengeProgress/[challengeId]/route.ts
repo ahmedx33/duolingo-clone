@@ -1,9 +1,13 @@
+import { prisma } from "@/db/db"
+import { NextResponse } from "next/server"
 
 
-const GET = async ({ params: { challengeId } }: { params: { challengeId: string } }) => {
+export const GET = async ({ params: { challengeId } }: { params: { challengeId: string } }) => {
     try {
-
-    } catch {
-        
+        const data = await prisma.challengeProgress.findMany()
+        console.log(challengeId)
+        return NextResponse.json({ data }, { status: 200 })
+    } catch (err) {
+        return new NextResponse(`${err}`, { status: 400 })
     }
 }

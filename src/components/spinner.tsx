@@ -1,8 +1,7 @@
-"use client"
+"use client";
 
-import { useRouter } from "next/navigation";
 import { PiSpinner } from "react-icons/pi";
 
 export default function Spinner() {
-    return <PiSpinner size={25} color="black" className="animate-spin"/>;
+    return <PiSpinner size={25} color="black" className="animate-spin" />;
 }

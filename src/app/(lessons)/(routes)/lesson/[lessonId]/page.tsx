@@ -9,7 +9,6 @@ export default async function Page({ params: { lessonId } }: { params: { lessonI
 
     return (
         <main className="py-14 h-screen">
-            <ChallengeHeader />
             <ChallengesList challenges={challenges} challengeOptions={challengeOptions} />
         </main>
     );

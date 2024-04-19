@@ -4,7 +4,7 @@ import { ChallengeOption, Challenge as ChallengeType } from "@prisma/client";
 import { Card } from "./card";
 import { Dispatch, SetStateAction, useMemo, useState } from "react";
 import { Button } from "../ui/button";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/lib/store";
 
 import { IoMdClose, IoMdCheckmark } from "react-icons/io";
@@ -12,6 +12,8 @@ import axios from "axios";
 import { cn } from "@/lib/utils";
 import { useAudio } from "react-use";
 import Image from "next/image";
+import { setChallengeId } from "@/lib/features/challenge/challenge-slice";
+import ChallengeHeader from "./challenge-header";
 
 export default function Challenge({
     id,
@@ -20,18 +22,18 @@ export default function Challenge({
     order,
     challengeOptions,
     setNextActiveChallenge,
-    lastChallengeIndex,
-    nextActiveChallenge,
+    challenges
 }: ChallengeType & {
     challengeOptions: ChallengeOption[];
     setNextActiveChallenge: Dispatch<SetStateAction<number>>;
-    nextActiveChallenge: number;
     lastChallengeIndex: number;
+    challenges: ChallengeType[]
 }) {
     const [selected, setSelected] = useState<string>();
     const [selectedCardStatus, setSelectedCardStatus] = useState<boolean>();
     const [isCorrect, setIsCorrect] = useState<boolean>();
     const [isLoading, setIsLoading] = useState<boolean>(false);
+    const [practice,setPractice ] = useState<number>(0)
     const splittedQuestion = question?.split('"');
 
     const [correct, _, correctControls] = useAudio({
@@ -42,6 +44,7 @@ export default function Challenge({
     });
 
     const userProgress = useSelector((state: RootState) => state.userProgress.value);
+    const dispatch = useDispatch()
     const isDisabled = selected === undefined;
 
     const getCurrentChallengeOptions = useMemo(() => {
@@ -52,8 +55,9 @@ export default function Challenge({
         if (selectedCardStatus === true) {
             setIsLoading(true);
             try {
-                // if (nextActiveChallenge === lastChallengeIndex) return;
                 const res = await axios.post("/api/challengeProgress/", { userId: userProgress.userId, challengeId: id, completed: true });
+                dispatch(setChallengeId(id))
+                setPractice(prev => prev + 100 / challenges.length)
                 correctControls.play();
                 setIsCorrect(true);
                 setIsLoading(false);
@@ -74,6 +78,8 @@ export default function Challenge({
         <div>
             {correct}
             {wrong}
+
+           <ChallengeHeader practice={practice} />
 
             {type === "SELECT" && (
                 <div className="absolute top-[175px] ">
@@ -121,6 +127,7 @@ export default function Challenge({
                             onClick={() => {
                                 setIsCorrect(undefined);
                                 setNextActiveChallenge((prev) => prev + 1);
+                               
                             }}
                         >
                             next

@@ -9,15 +9,14 @@ export const getChallenges = unstable_cache(cache(async ({ lessonId }: { lessonI
         where: {
             lessonId
         },
-        
+
     })
 
     return data
 }), ["challenges"])
 
-
 export const getChallengeOption = unstable_cache(cache(async () => {
     const data = await prisma.challengeOption.findMany()
 
     return data
-}))
+}), ["getChallengeOption"])

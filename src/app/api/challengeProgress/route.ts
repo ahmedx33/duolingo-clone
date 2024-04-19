@@ -1,4 +1,5 @@
 import { prisma } from "@/db/db"
+import { revalidatePath } from "next/cache"
 import { NextRequest, NextResponse } from "next/server"
 
 
@@ -16,6 +17,11 @@ export const POST = async (req: NextRequest) => {
                 completed
             }
         })
+
+        revalidatePath("/learn")
+        revalidatePath("/lesson")
+        revalidatePath(`/lesson/${challengeId}`)
+        revalidatePath("/leaderstats")
 
         return NextResponse.json(challengeProgress, { status: 200 })
 
