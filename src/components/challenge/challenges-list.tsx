@@ -2,6 +2,7 @@
 import { ChallengeOption, Challenge as ChallengeType } from "@prisma/client";
 import Challenge from "./challenge";
 import { useState } from "react";
+import Practice from "./practice";
 
 interface ChallengesListProps {
     challenges: ChallengeType[];
@@ -14,7 +15,7 @@ export default function ChallengesList({ challenges, challengeOptions }: Challen
     return (
         <main className="mx-auto w-fit mt-[10rem] ">
             {nextActiveChallenge === challenges.length ? (
-                <h1>practice </h1>
+                <Practice />
             ) : (
                 <Challenge
                     {...activeChallenge}

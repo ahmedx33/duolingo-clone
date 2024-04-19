@@ -22,18 +22,18 @@ export default function Challenge({
     order,
     challengeOptions,
     setNextActiveChallenge,
-    challenges
+    challenges,
 }: ChallengeType & {
     challengeOptions: ChallengeOption[];
     setNextActiveChallenge: Dispatch<SetStateAction<number>>;
     lastChallengeIndex: number;
-    challenges: ChallengeType[]
+    challenges: ChallengeType[];
 }) {
     const [selected, setSelected] = useState<string>();
     const [selectedCardStatus, setSelectedCardStatus] = useState<boolean>();
     const [isCorrect, setIsCorrect] = useState<boolean>();
     const [isLoading, setIsLoading] = useState<boolean>(false);
-    const [practice,setPractice ] = useState<number>(0)
+    const [practice, setPractice] = useState<number>(0);
     const splittedQuestion = question?.split('"');
 
     const [correct, _, correctControls] = useAudio({
@@ -43,8 +43,10 @@ export default function Challenge({
         src: "/sounds/duolingo-wrong.mp3",
     });
 
+    console.log(selected)
+
     const userProgress = useSelector((state: RootState) => state.userProgress.value);
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
     const isDisabled = selected === undefined;
 
     const getCurrentChallengeOptions = useMemo(() => {
@@ -56,11 +58,12 @@ export default function Challenge({
             setIsLoading(true);
             try {
                 const res = await axios.post("/api/challengeProgress/", { userId: userProgress.userId, challengeId: id, completed: true });
-                dispatch(setChallengeId(id))
-                setPractice(prev => prev + 100 / challenges.length)
+                dispatch(setChallengeId(id));
+                setPractice((prev) => prev + 100 / challenges.length);
                 correctControls.play();
                 setIsCorrect(true);
                 setIsLoading(false);
+                setSelected(undefined)
             } catch (err) {
                 console.error(err);
             }
@@ -70,7 +73,7 @@ export default function Challenge({
                 wrongControls.play();
                 setIsLoading(false);
                 setIsCorrect(false);
-            }, 1500);
+            }, 1000);
         }
     };
 
@@ -79,7 +82,7 @@ export default function Challenge({
             {correct}
             {wrong}
 
-           <ChallengeHeader practice={practice} />
+            <ChallengeHeader practice={practice} />
 
             {type === "SELECT" && (
                 <div className="absolute top-[175px] ">
@@ -109,9 +112,15 @@ export default function Challenge({
                 ))}
             </div>
             <footer className="border-t-2 absolute bottom-0 left-0 w-full p-5 px-40 text-right">
-                <Button disabled={isDisabled || isLoading} onClick={checkCardStatus} variant="primaryGreen" className={cn("text-white rounded-md w-[110px] h-[44px]", isCorrect ? "hidden" : "")}>
-                    Check
-                </Button>
+                {isDisabled === false ? (
+                    <Button disabled={isLoading} onClick={checkCardStatus} variant="primaryGreen" className={cn("text-white rounded-md w-[110px] h-[44px]", isCorrect ? "hidden" : "")}>
+                        Check
+                    </Button>
+                ) : (
+                    <Button disabled={true} variant="primaryGreen" className={cn("text-white rounded-md w-[110px] h-[44px]", isCorrect ? "hidden" : "")}>
+                        Check
+                    </Button>
+                )}
 
                 {isCorrect === true && (
                     <div className="w-full h-[150px] fixed bottom-0 left-0 z-50 border-green-300 bg-[#D7FFB8] text-green-300 flex items-center justify-around px-40">
@@ -127,7 +136,6 @@ export default function Challenge({
                             onClick={() => {
                                 setIsCorrect(undefined);
                                 setNextActiveChallenge((prev) => prev + 1);
-                               
                             }}
                         >
                             next
