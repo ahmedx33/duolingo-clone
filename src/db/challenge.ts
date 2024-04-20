@@ -11,6 +11,7 @@ export const getChallenges = unstable_cache(cache(async ({ lessonId }: { lessonI
         },
 
     })
+    
 
     return data
 }), ["challenges"])

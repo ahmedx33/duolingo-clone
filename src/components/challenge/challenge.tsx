@@ -94,7 +94,7 @@ export default function Challenge({
                 </div>
             )}
 
-            <h1 className="mb-[27px] text-[2rem] font-semibold text-[#404040]">{type === "SELECT" ? splittedQuestion[0] : question}</h1>
+            <h1 className="text-[2rem] font-semibold text-[#404040] relative -top-[90px]">{type === "SELECT" ? splittedQuestion[0] : question}</h1>
 
             <div className={cn("flex items-center gap-2", type === "SELECT" && "flex-col")}>
                 {getCurrentChallengeOptions?.map((challengeOption, idx) => (

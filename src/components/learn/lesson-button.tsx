@@ -8,6 +8,7 @@ import { cn } from "@/lib/utils";
 import { Challenge, Lesson } from "@prisma/client";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import Link from "next/link";
+import { revalidatePath } from "next/cache";
 
 export default function LessonButton({
     id,
@@ -61,11 +62,16 @@ export default function LessonButton({
                             <div className={cn(isLocked ? "text-[#AFAFAF]" : "text-white")}>{icon}</div>
                         </Button>
                     </DropdownMenuTrigger>
-                    <DropdownMenuContent className="bg-[#58CC02]">
-                        <DropdownMenuItem className="w-fit h-fit p-0 !bg-[#58CC02]">
-                            <Link href={`/lesson/${id}`}>
-                                <Button className="text-[#58CC02] uppercase font-bold ">start</Button>
-                            </Link>
+                    <DropdownMenuContent className={cn("bg-[#58CC02] p-[15px] rounded-xl w-[300px]", isLocked && "bg-[#F3F4F6]")}>
+                        <DropdownMenuLabel className={cn("capitalize font-bold text-white text-[1.2rem]", isLocked && "text-[#9CA3AF]")}>{title}</DropdownMenuLabel>
+                        <DropdownMenuItem disabled={isLocked} className={cn("w-full h-fit p-0 !bg-[#58CC02]", isLocked && "!bg-[#F3F4F6]")}>
+                            {isLocked ? (
+                                <Button  className="text-[#F3F4F6] bg-[#B7B7B7] border-[#B7B7B7] hover:border-[#B7B7B7] hover:bg-[#B7B7B7] uppercase font-bold w-full p-5 active:border-b-4 cursor-default">start</Button>
+                            ) : (
+                                <Link className="w-full" href={`/lesson/${id}`}>
+                                    <Button className="text-[#58CC02] uppercase font-bold w-full p-5">start</Button>
+                                </Link>
+                            )}
                         </DropdownMenuItem>
                     </DropdownMenuContent>
                 </DropdownMenu>

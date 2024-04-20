@@ -1,5 +1,5 @@
 import { prisma } from "@/db/db";
-import Course from "./Course";
+import { Course } from "./course";
 
 export default async function CoursesList() {
     const courses = await prisma.course.findMany();

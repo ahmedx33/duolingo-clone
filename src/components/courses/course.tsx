@@ -15,7 +15,7 @@ import axios from "axios";
 
 import { FaCheck } from "react-icons/fa6";
 
-export default function Course({ id, title, imageSrc }: CourseType) {
+export function Course({ id, title, imageSrc }: CourseType) {
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const router = useRouter();
     const currentUser = useSelector((state: RootState) => state.userProgress.value);

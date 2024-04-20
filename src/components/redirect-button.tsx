@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 
 
 interface RedirectButtonProps {
-    path: string,
+    path?: string,
     children: ReactNode
 }
 

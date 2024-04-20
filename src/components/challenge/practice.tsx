@@ -11,15 +11,15 @@ export default function Practice() {
         src: "/sounds/level-complete.mp3",
     });
 
-    controls.play()
+    useEffect(() => {
+        controls.play();
 
-    const timeout = setTimeout(() => {
-        controls.mute()
-    }, 200)
-
-
-    clearTimeout(timeout)
-
+        return () => {
+            controls.pause();
+            controls.seek(0);
+        };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     return (
         <main>
