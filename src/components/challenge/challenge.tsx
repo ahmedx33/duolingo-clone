@@ -1,19 +1,20 @@
 "use client";
 
 import { ChallengeOption, Challenge as ChallengeType } from "@prisma/client";
-import { Card } from "./card";
-import { Dispatch, SetStateAction, useMemo, useState } from "react";
-import { Button } from "../ui/button";
-import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "@/lib/store";
-
-import { IoMdClose, IoMdCheckmark } from "react-icons/io";
-import axios from "axios";
-import { cn } from "@/lib/utils";
-import { useAudio } from "react-use";
-import Image from "next/image";
 import { setChallengeId } from "@/lib/features/challenge/challenge-slice";
+import { Dispatch, SetStateAction, useMemo, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { IoMdClose, IoMdCheckmark } from "react-icons/io";
+
 import ChallengeHeader from "./challenge-header";
+import Image from "next/image";
+import axios from "axios";
+
+import { RootState } from "@/lib/store";
+import { Button } from "../ui/button";
+import { useAudio } from "react-use";
+import { cn } from "@/lib/utils";
+import { Card } from "./card";
 
 export default function Challenge({
     id,
@@ -58,9 +59,9 @@ export default function Challenge({
             setIsLoading(true);
             try {
                 const res = await axios.post("/api/challengeProgress/", { userId: userProgress.userId, challengeId: id, completed: true });
+                correctControls.play();
                 dispatch(setChallengeId(id));
                 setPractice((prev) => prev + 100 / challenges.length);
-                correctControls.play();
                 setIsCorrect(true);
                 setIsLoading(false);
                 setSelected(undefined)
