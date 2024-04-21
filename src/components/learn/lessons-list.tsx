@@ -6,7 +6,6 @@ import { Lesson } from "@prisma/client";
 import { revalidatePath } from "next/cache";
 
 export default async function LessonsList({ lessons }: { lessons: Lesson[] }) {
-    const userProgress = await auth()
     const challenges = await prisma.challenge.findMany({
         include: {
             progresses: true

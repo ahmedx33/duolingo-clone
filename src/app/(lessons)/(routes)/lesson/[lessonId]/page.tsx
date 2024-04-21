@@ -5,7 +5,7 @@ const ChallengesList = lazy(() => import("@/components/challenge/challenges-list
 const ChallengeHeader = lazy(() => import("@/components/challenge/challenge-header"));
 
 export default async function Page({ params: { lessonId } }: { params: { lessonId: string } }) {
-    const [challenges] = await Promise.all([getChallenges({ lessonId })]);
+    const challenges = await getChallenges({ lessonId });
 
     return (
         <main className="py-14 h-screen">

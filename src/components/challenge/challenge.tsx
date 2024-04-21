@@ -17,12 +17,10 @@ import { cn } from "@/lib/utils";
 import { Card } from "./card";
 import { mainUser } from "@/lib/features/user/user-progress-slice";
 import { toast } from "sonner";
+import { ChallengeWithChildren } from "./challenges-list";
 
 
-type ChallengeWithChildren = ChallengeType & {
-    options?: ChallengeOption[],
-    progresses?: ChallengeProgress[]
-}
+
 
 export default function Challenge({
     id,
@@ -51,7 +49,7 @@ export default function Challenge({
         src: "/sounds/duolingo-wrong.mp3",
     });
 
-    console.log(selected);
+    console.log(options);
 
     const { userId, hearts, points, userName, userImageSrc , activeCourseId} = useSelector((state: RootState) => state.userProgress.value);
     const dispatch = useDispatch();
