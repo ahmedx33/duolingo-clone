@@ -5,19 +5,22 @@ import { Progress } from "@/components/ui/progress";
 
 import { CloseButton } from "./components/close-button";
 import { Dispatch, SetStateAction, useState } from "react";
+import { useSelector } from "react-redux";
+import { RootState } from "@/lib/store";
 
 interface ChallengeHeaderProps {
     practice: number;
 }
 
 export default function ChallengeHeader({ practice }: ChallengeHeaderProps) {
+    const { hearts } = useSelector((state: RootState) => state.userProgress.value);
     return (
         <nav className="flex items-center w-[800px] mx-auto gap-x-5 absolute top-[70px] left-1/2 right-1/2 -translate-x-1/2 ">
             <CloseButton />
             <Progress value={practice} className="h-4" />
             <div className="flex items-center gap-x-2">
                 <TiHeartFullOutline color="#FF4B4B" size={30} />
-                <span className="text-[#FF4B4B] font-semibold">5</span>
+                <span className="text-[#FF4B4B] font-semibold">{hearts}</span>
             </div>
         </nav>
     );
