@@ -36,7 +36,7 @@ export default async function RootLayout({
             <html lang="en">
                 <StoreProvider>
                     <body className={`${font.className}`}>
-                        <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+                        <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
                             <UserProgerssProvider userProgress={userProgress as UserProgress} />
                             {children}
                         </ThemeProvider>
