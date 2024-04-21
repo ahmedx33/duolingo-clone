@@ -70,6 +70,11 @@ export default function Challenge({
                     setSelected(undefined);
                 });
             } catch (err) {
+                console.error(err);
+            }
+        } else {
+            setIsLoading(true);
+            setTimeout(() => {
                 dispatch(
                     mainUser({
                         userId: userProgress.userId,
@@ -80,10 +85,6 @@ export default function Challenge({
                         activeCourseId: userProgress.activeCourseId,
                     })
                 );
-            }
-        } else {
-            setIsLoading(true);
-            setTimeout(() => {
                 wrongControls.play();
                 setIsLoading(false);
                 setIsCorrect(false);
