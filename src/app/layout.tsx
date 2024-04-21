@@ -25,11 +25,15 @@ export default async function RootLayout({
     children: React.ReactNode;
 }>) {
     const user = await currentUser();
-    const userProgress = await prisma.userProgress.findUnique({
-        where: {
-            userId: user?.id,
-        },
-    });
+    let userProgress = null 
+
+    if (user) {
+        userProgress = await prisma.userProgress.findUnique({
+            where: {
+                userId: user?.id,
+            },
+        });
+    }
 
     return (
         <ClerkProvider>

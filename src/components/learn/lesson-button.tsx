@@ -33,7 +33,7 @@ export default function LessonButton({
     const marginLeft = order % 2 === 0 ? 50 : 0;
     const currentLesson = order === 1;
     const isLocked = order !== 1;
-    const { userId } = useSelector((state: RootState) => state.userProgress.value);
+    // const { userId } = useSelector((state: RootState) => state.userProgress.value);
 
     const filterdChallengeProgress = useMemo(() => {
         return challengeProgress.filter((progress) => progress.challenge.lessonId === id);
@@ -41,7 +41,7 @@ export default function LessonButton({
 
     const isCompleted = filterdChallengeProgress.every((progress) => progress ? progress.completed === true : false );
     const practice = filterdChallengeProgress.filter((progress) => progress.completed === true).length;
-    console.log(isCompleted)
+
     return (
         <div
             className={cn("w-[100px] h-[100px] relative")}
@@ -56,7 +56,7 @@ export default function LessonButton({
                 </div>
             )}
 
-            { order === 1 || isCompleted ? (
+            { order === 1 ? (
                 <CircularProgressbarWithChildren
                     value={practice}
                     styles={{
@@ -86,8 +86,8 @@ export default function LessonButton({
                 </CircularProgressbarWithChildren>
             ) : (
                 <DropdownMenu>
-                    <DropdownMenuTrigger>
-                        <Button size="rounded" className="w-[70px] h-[70px] bg-[#e5e5e5] border-[#AFAFAF] hover:bg-[#E5E5E5] hover:border-[#AFAFAF]">
+                    <DropdownMenuTrigger> 
+                        <Button size="rounded" className="w-[70px] h-[70px] border-b-8 bg-[#e5e5e5] border-[#AFAFAF] hover:bg-[#E5E5E5] hover:border-[#AFAFAF]">
                             <div className="text-[#AFAFAF]">{icon}</div>
                         </Button>
                     </DropdownMenuTrigger>

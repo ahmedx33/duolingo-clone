@@ -15,13 +15,13 @@ export default async function layout({ children }: { children: ReactNode }) {
         },
     });
 
+    if (!userProgress) return redirect("/courses");
+
     const activeCourse = await prisma.course.findUnique({
         where: {
             id: userProgress?.activeCourseId as string,
         },
     });
-
-    if (!userProgress) return redirect("/courses");
 
     return (
         <main className="flex items-start overflow-hidden">

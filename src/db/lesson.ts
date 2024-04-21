@@ -1,4 +1,4 @@
-import { unstable_cache } from "next/cache";
+import { revalidatePath, unstable_cache } from "next/cache";
 import { cache } from "react";
 import { prisma } from "./db";
 
@@ -20,6 +20,9 @@ export const getUnits = unstable_cache(cache(async () => {
             },
         },
     });
+
+    revalidatePath("/leaderstats")
+    revalidatePath("/shop")
 
     return data
 }), ["lessons"])

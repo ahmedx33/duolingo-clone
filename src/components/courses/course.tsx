@@ -5,7 +5,7 @@ import { Button } from "../ui/button";
 import { Course as CourseType } from "@prisma/client";
 
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
 import { useSelector } from "react-redux";
@@ -17,12 +17,15 @@ import { FaCheck } from "react-icons/fa6";
 
 export function Course({ id, title, imageSrc }: CourseType) {
     const [isLoading, setIsLoading] = useState<boolean>(false);
+    const [isActive, setIsActive] = useState<boolean>(false);
     const router = useRouter();
-    const currentUser = useSelector((state: RootState) => state.userProgress.value);
-    const isActive = currentUser.activeCourseId === id;
+    const userProgress = useSelector((state: RootState) => state.userProgress.value);
 
-    console.log(currentUser);
-    console.log(isActive);
+    useEffect(() => {
+        if (userProgress) {
+            setIsActive(userProgress.activeCourseId === id);
+        }
+    }, [id, userProgress]);
 
     const createNewProgress = async () => {
         try {

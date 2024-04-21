@@ -2,7 +2,7 @@
 
 import { ChallengeOption, Challenge as ChallengeType } from "@prisma/client";
 import { setChallengeId } from "@/lib/features/challenge/challenge-slice";
-import { Dispatch, SetStateAction, useMemo, useState } from "react";
+import { Dispatch, SetStateAction, useMemo, useState, useTransition } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { IoMdClose, IoMdCheckmark } from "react-icons/io";
 
@@ -35,7 +35,7 @@ export default function Challenge({
     const [isCorrect, setIsCorrect] = useState<boolean>();
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [practice, setPractice] = useState<number>(0);
-    const splittedQuestion = question?.split('"');
+    const [isPending, startTransition] = useTransition();
 
     const [correct, _, correctControls] = useAudio({
         src: "/sounds/duolingo-correct.mp3",
@@ -44,11 +44,12 @@ export default function Challenge({
         src: "/sounds/duolingo-wrong.mp3",
     });
 
-    console.log(selected)
+    console.log(selected);
 
     const userProgress = useSelector((state: RootState) => state.userProgress.value);
     const dispatch = useDispatch();
     const isDisabled = selected === undefined;
+    const splittedQuestion = question?.split('"');
 
     const getCurrentChallengeOptions = useMemo(() => {
         return challengeOptions.filter((challengeOption) => challengeOption.challengeId === id);
@@ -59,12 +60,14 @@ export default function Challenge({
             setIsLoading(true);
             try {
                 const res = await axios.post("/api/challengeProgress/", { userId: userProgress.userId, challengeId: id, completed: true });
-                correctControls.play();
-                dispatch(setChallengeId(id));
-                setPractice((prev) => prev + 100 / challenges.length);
-                setIsCorrect(true);
-                setIsLoading(false);
-                setSelected(undefined)
+                startTransition(() => {
+                    correctControls.play();
+                    dispatch(setChallengeId(id));
+                    setPractice((prev) => prev + 100 / challenges.length);
+                    setIsCorrect(true);
+                    setIsLoading(false);
+                    setSelected(undefined);
+                });
             } catch (err) {
                 console.error(err);
             }
