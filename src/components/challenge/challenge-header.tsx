@@ -15,7 +15,7 @@ export default function ChallengeHeader({practice}: ChallengeHeaderProps) {
     return (
         <nav className="flex items-center w-[800px] mx-auto gap-x-5 absolute top-[70px] left-1/2 right-1/2 -translate-x-1/2 ">
             <CloseButton />
-            <Progress value={practice} className="h-4" customColor="bg-[#22C55E]" />
+            <Progress value={practice} className="h-4" />
             <div className="flex items-center gap-x-2">
                 <TiHeartFullOutline color="#FF4B4B" size={30} />
                 <span className="text-[#FF4B4B] font-semibold">5</span>

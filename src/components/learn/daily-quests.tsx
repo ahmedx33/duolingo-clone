@@ -40,7 +40,7 @@ function QuestProgress({ value, totalPoints }: QuestProgressProps) {
             <h1 className="ml-[40px] text-[#4B4B4B] font-bold">Earn {value} XP</h1>
             <span className="w-full flex items-center gap-x-3">
                 <BsFillLightningChargeFill size={30} color="#F7C100" />
-                <Progress value={totalPoints} customColor="bg-[#f7c100]" className="h-3" />
+                <Progress value={totalPoints} className="h-3" />
             </span>
         </section>
     );
