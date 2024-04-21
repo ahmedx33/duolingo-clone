@@ -13,8 +13,8 @@ import { RootState } from "@/lib/store";
 import axios from "axios";
 import { Progress } from "@radix-ui/react-progress";
 
-type ChallengeProgressWithChildren = ChallengeProgress & {
-    challenge: Challenge & { lesson: Lesson };
+type ChallengeWithChildren = Challenge & {
+    progresses: ChallengeProgress[]
 };
 
 export default function LessonButton({
@@ -22,35 +22,34 @@ export default function LessonButton({
     order,
     title,
     lessonsCount,
-    challengeProgress,
+    challenges,
     lessons,
 }: Lesson & {
     lessonsCount?: number;
-    challengeProgress: ChallengeProgressWithChildren[];
+    challenges: ChallengeWithChildren[];
     lessons: Lesson[];
 }) {
     const [practice,setPractice] = useState<number>(0)
     const icon = order === lessonsCount ? <FaCrown size={30} /> : <FaStar size={30} />;
     const marginLeft = order % 2 === 0 ? 50 : 0;
     const currentLesson = order === 1;
-    const isLocked = order !== 1;
-    // const { userId } = useSelector((state: RootState) => state.userProgress.value);
-
-    const filterdChallengeProgress = useMemo(() => {
-        return challengeProgress.filter((progress) => progress.challenge.lessonId === id);
-    }, [challengeProgress, id]);
-
-    const isCompleted = filterdChallengeProgress.every((progress) => progress ? progress.completed === true : false );
-    const practiceCount = filterdChallengeProgress.filter((progress) => progress.completed === true).length;
-
-    useEffect(() => {
-        if (practiceCount === 1 || practiceCount === 2 || practiceCount === 3 ) {
-            setPractice(prev => prev + 50)
-        }
-    }, [practiceCount])
+    const isLocked = order !== 1
 
 
-    console.log(practice)
+    const currentChallenge = challenges.find((challenge) => challenge.lessonId === id)
+    const completedChallengePercentage = useMemo(() => {
+        const completedChallenges = currentChallenge?.progresses.filter((challenge) => challenge.completed)
+
+        if (completedChallenges?.length === 0) return 0
+
+        const challengePercentage = Math.round( completedChallenges?.length / challenges.length) * 100
+
+
+        return Number.isNaN(challengePercentage) ? 0 : challengePercentage
+    }, [challenges.length, currentChallenge?.progresses])
+
+    console.log(completedChallengePercentage)
+   
     return (
         <div
             className={cn("w-[100px] h-[100px] relative")}
@@ -67,7 +66,7 @@ export default function LessonButton({
 
             { order === 1 ? (
                 <CircularProgressbarWithChildren
-                    value={practice }
+                    value={completedChallengePercentage }
                     styles={{
                         path: {
                             stroke: "#58CC02",
