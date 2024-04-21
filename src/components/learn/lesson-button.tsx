@@ -47,8 +47,6 @@ export default function LessonButton({
 
         return Number.isNaN(challengePercentage) ? 0 : challengePercentage
     }, [challenges.length, currentChallenge?.progresses])
-
-    console.log(completedChallengePercentage)
    
     return (
         <div

@@ -10,6 +10,11 @@ export const getChallenges = unstable_cache(cache(async ({ lessonId }: { lessonI
             lessonId
         },
 
+        include: {
+            progresses: true,
+            options: true
+        }
+
     })
 
     return data

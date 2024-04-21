@@ -5,11 +5,11 @@ const ChallengesList = lazy(() => import("@/components/challenge/challenges-list
 const ChallengeHeader = lazy(() => import("@/components/challenge/challenge-header"));
 
 export default async function Page({ params: { lessonId } }: { params: { lessonId: string } }) {
-    const [challenges, challengeOptions] = await Promise.all([getChallenges({ lessonId }), getChallengeOption()]);
+    const [challenges] = await Promise.all([getChallenges({ lessonId })]);
 
     return (
         <main className="py-14 h-screen">
-            <ChallengesList challenges={challenges} challengeOptions={challengeOptions} />
+            <ChallengesList challenges={challenges} />
         </main>
     );
 }

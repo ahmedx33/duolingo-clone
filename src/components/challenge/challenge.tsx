@@ -1,10 +1,10 @@
 "use client";
 
-import { ChallengeOption, Challenge as ChallengeType } from "@prisma/client";
-import { setChallengeId } from "@/lib/features/challenge/challenge-slice";
 import { Dispatch, SetStateAction, useMemo, useState, useTransition } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { setChallengeId } from "@/lib/features/challenge/challenge-slice";
+import { ChallengeOption, ChallengeProgress, Challenge as ChallengeType } from "@prisma/client";
 import { IoMdClose, IoMdCheckmark } from "react-icons/io";
+import { useDispatch, useSelector } from "react-redux";
 
 import ChallengeHeader from "./challenge-header";
 import Image from "next/image";
@@ -18,16 +18,21 @@ import { Card } from "./card";
 import { mainUser } from "@/lib/features/user/user-progress-slice";
 import { toast } from "sonner";
 
+
+type ChallengeWithChildren = ChallengeType & {
+    options?: ChallengeOption[],
+    progresses?: ChallengeProgress[]
+}
+
 export default function Challenge({
     id,
     type,
     question,
-    order,
-    challengeOptions,
     setNextActiveChallenge,
     challenges,
-}: ChallengeType & {
-    challengeOptions: ChallengeOption[];
+    options,
+  
+}: ChallengeWithChildren & {
     setNextActiveChallenge: Dispatch<SetStateAction<number>>;
     lastChallengeIndex: number;
     challenges: ChallengeType[];
@@ -52,10 +57,6 @@ export default function Challenge({
     const dispatch = useDispatch();
     const isDisabled = selected === undefined;
     const splittedQuestion = question?.split('"');
-
-    const getCurrentChallengeOptions = useMemo(() => {
-        return challengeOptions.filter((challengeOption) => challengeOption.challengeId === id);
-    }, [challengeOptions, id]);
 
     const checkCardStatus = async () => {
         if (hearts === 0) return toast.error("You have less hearts");
@@ -116,7 +117,7 @@ export default function Challenge({
             <h1 className="text-[2rem] font-semibold text-[#404040] relative -top-[90px]">{type === "SELECT" ? splittedQuestion[0] : question}</h1>
 
             <div className={cn("flex items-center gap-2", type === "SELECT" && "flex-col")}>
-                {getCurrentChallengeOptions?.map((challengeOption, idx) => (
+                {options?.map((challengeOption, idx) => (
                     <Card
                         key={challengeOption.id}
                         {...challengeOption}

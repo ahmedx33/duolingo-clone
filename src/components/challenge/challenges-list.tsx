@@ -1,15 +1,15 @@
 "use client";
-import { ChallengeOption, Challenge as ChallengeType } from "@prisma/client";
+import { ChallengeOption, ChallengeProgress, Challenge as ChallengeType } from "@prisma/client";
 import Challenge from "./challenge";
 import { useState } from "react";
 import Practice from "./practice";
 
+
 interface ChallengesListProps {
     challenges: ChallengeType[];
-    challengeOptions: ChallengeOption[];
 }
 
-export default function ChallengesList({ challenges, challengeOptions }: ChallengesListProps) {
+export default function ChallengesList({ challenges }: ChallengesListProps) {
     const [nextActiveChallenge, setNextActiveChallenge] = useState<number>(0);
     const activeChallenge = challenges[nextActiveChallenge];
     return (
@@ -20,7 +20,6 @@ export default function ChallengesList({ challenges, challengeOptions }: Challen
                 <Challenge
                     {...activeChallenge}
                     challenges={challenges}
-                    challengeOptions={challengeOptions}
                     setNextActiveChallenge={setNextActiveChallenge}
                     lastChallengeIndex={challenges.length - 1}
                 />
