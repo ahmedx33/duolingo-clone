@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { TiHeartFullOutline } from "react-icons/ti";
 import { Progress } from "@/components/ui/progress";
@@ -10,8 +10,7 @@ interface ChallengeHeaderProps {
     practice: number;
 }
 
-export default function ChallengeHeader({practice}: ChallengeHeaderProps) {
-
+export default function ChallengeHeader({ practice }: ChallengeHeaderProps) {
     return (
         <nav className="flex items-center w-[800px] mx-auto gap-x-5 absolute top-[70px] left-1/2 right-1/2 -translate-x-1/2 ">
             <CloseButton />
@@ -21,5 +20,5 @@ export default function ChallengeHeader({practice}: ChallengeHeaderProps) {
                 <span className="text-[#FF4B4B] font-semibold">5</span>
             </div>
         </nav>
-    )
+    );
 }
