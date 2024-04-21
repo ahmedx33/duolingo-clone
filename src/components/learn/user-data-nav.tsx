@@ -10,6 +10,7 @@ import Link from "next/link";
 import Upgrade from "./upgrade";
 import DailyQuests from "./daily-quests";
 import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 interface HeaderProps {
     courseImageSrc: string;
@@ -39,8 +40,10 @@ export default function UserDataNav({
 function Header({ courseImageSrc, hearts, points }: HeaderProps) {
     const router = useRouter()
 
-
-    router.refresh()
+    useEffect(() => {
+        router.refresh()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
     return (
         <section className="flex  items-center gap-x-20 mb-7">
             <Link href="/courses" className="w-fit h-fit overflow-hidden rounded-md">

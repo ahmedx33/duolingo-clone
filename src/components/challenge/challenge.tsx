@@ -16,6 +16,7 @@ import { useAudio } from "react-use";
 import { cn } from "@/lib/utils";
 import { Card } from "./card";
 import { mainUser } from "@/lib/features/user/user-progress-slice";
+import { toast } from "sonner";
 
 export default function Challenge({
     id,
@@ -47,7 +48,7 @@ export default function Challenge({
 
     console.log(selected);
 
-    const userProgress = useSelector((state: RootState) => state.userProgress.value);
+    const { userId, hearts, points, userName, userImageSrc , activeCourseId} = useSelector((state: RootState) => state.userProgress.value);
     const dispatch = useDispatch();
     const isDisabled = selected === undefined;
     const splittedQuestion = question?.split('"');
@@ -57,10 +58,11 @@ export default function Challenge({
     }, [challengeOptions, id]);
 
     const checkCardStatus = async () => {
+        if (hearts === 0) return toast.error("You have less hearts");
         if (selectedCardStatus === true) {
             setIsLoading(true);
             try {
-                const _res = await axios.post("/api/challengeProgress/", { userId: userProgress.userId, challengeId: id, completed: true });
+                const _res = await axios.post("/api/challengeProgress/", { userId, challengeId: id, completed: true });
                 startTransition(() => {
                     correctControls.play();
                     dispatch(setChallengeId(id));
@@ -74,21 +76,23 @@ export default function Challenge({
             }
         } else {
             setIsLoading(true);
-            setTimeout(() => {
-                dispatch(
-                    mainUser({
-                        userId: userProgress.userId,
-                        hearts: Math.min(userProgress.hearts - 1, 5),
-                        userName: userProgress.userName,
-                        userImageSrc: userProgress.userImageSrc,
-                        points: userProgress.points,
-                        activeCourseId: userProgress.activeCourseId,
-                    })
-                );
-                wrongControls.play();
-                setIsLoading(false);
-                setIsCorrect(false);
-            }, 1000);
+
+            const _res = await axios.patch("/api/userProgress/", { userId, hearts: hearts - 1, points, collectedPoints: 0 });
+
+            dispatch(
+                mainUser({
+                    userId: userId,
+                    hearts: Math.min(hearts - 1, 5),
+                    userName: userName,
+                    userImageSrc: userImageSrc,
+                    points: points,
+                    activeCourseId: activeCourseId,
+                })
+            );
+
+            wrongControls.play();
+            setIsLoading(false);
+            setIsCorrect(false);
         }
     };
 
