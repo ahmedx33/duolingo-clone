@@ -71,7 +71,8 @@ export default function LessonButton({
                     styles={{
                         path: {
                             stroke: "#58CC02",
-                            borderRadius: 100
+                            strokeLinecap: "round",
+                            borderRadius: "50%"
                         },
                         trail: {
                             stroke: "#E5E5E5",
