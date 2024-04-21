@@ -29,6 +29,7 @@ export default function LessonButton({
     challengeProgress: ChallengeProgressWithChildren[];
     lessons: Lesson[];
 }) {
+    const [practice,setPractice] = useState<number>(0)
     const icon = order === lessonsCount ? <FaCrown size={30} /> : <FaStar size={30} />;
     const marginLeft = order % 2 === 0 ? 50 : 0;
     const currentLesson = order === 1;
@@ -40,8 +41,16 @@ export default function LessonButton({
     }, [challengeProgress, id]);
 
     const isCompleted = filterdChallengeProgress.every((progress) => progress ? progress.completed === true : false );
-    const practice = filterdChallengeProgress.filter((progress) => progress.completed === true).length;
+    const practiceCount = filterdChallengeProgress.filter((progress) => progress.completed === true).length;
 
+    useEffect(() => {
+        if (practiceCount === 1 || practiceCount === 2 || practiceCount === 3 ) {
+            setPractice(prev => prev + 50)
+        }
+    }, [practiceCount])
+
+
+    console.log(practice)
     return (
         <div
             className={cn("w-[100px] h-[100px] relative")}
@@ -58,14 +67,16 @@ export default function LessonButton({
 
             { order === 1 ? (
                 <CircularProgressbarWithChildren
-                    value={practice}
+                    value={practice }
                     styles={{
                         path: {
                             stroke: "#58CC02",
+                            borderRadius: 100
                         },
                         trail: {
                             stroke: "#E5E5E5",
                         },
+                        
                     }}
                 >
                     <DropdownMenu>
