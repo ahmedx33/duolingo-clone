@@ -21,8 +21,5 @@ export const getUnits = unstable_cache(cache(async () => {
         },
     });
 
-    revalidatePath("/leaderstats")
-    revalidatePath("/shop")
-
     return data
 }), ["lessons"])

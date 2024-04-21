@@ -5,11 +5,16 @@ import { Button } from "../ui/button";
 import Reward from "./components/reward";
 import { useAudio } from "react-use";
 import { useEffect } from "react";
+import axios from "axios";
+import { useSelector } from "react-redux";
+import { RootState } from "@/lib/store";
 
 export default function Practice() {
     const [audio, _, controls] = useAudio({
         src: "/sounds/level-complete.mp3",
     });
+
+    const { userId, hearts, points } = useSelector((state: RootState) => state.userProgress.value);
 
     useEffect(() => {
         controls.play();
@@ -18,8 +23,17 @@ export default function Practice() {
             controls.pause();
             controls.seek(0);
         };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
+
+    const updateUserProgress = async () => {
+        try {
+            const res = await axios.patch("/api/userProgress/", { userId, hearts, points });
+            console.log(res)
+        } catch (err) {
+            console.log(err);
+        }
+    };
 
     return (
         <main>
@@ -31,7 +45,7 @@ export default function Practice() {
 
             <footer className="border-gray-200 sm:border-t-2 sm:p-10 absolute bottom-0 left-0 w-full text-right">
                 <Link href="/learn">
-                    <Button variant="primaryGreen" className="uppercase font-bold text-white sm:min-w-[150px] sm:max-w-fit p-6">
+                    <Button onClick={updateUserProgress} variant="primaryGreen" className="uppercase font-bold text-white sm:min-w-[150px] sm:max-w-fit p-6">
                         Continue
                     </Button>
                 </Link>

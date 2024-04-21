@@ -15,7 +15,7 @@ interface QuestProgressProps {
 
 export default function DailyQuests() {
     const currentUser = useSelector((state: RootState) => state.userProgress.value)
-    const totalPoints = currentUser.points
+    const totalPoints = currentUser?.points
 
     return (
         <main className="border-[#DDDDDD] border-2 rounded-xl py-3 px-5 flex flex-col  min-h-48 w-[350px] mb-6">

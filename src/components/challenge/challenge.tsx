@@ -15,6 +15,7 @@ import { Button } from "../ui/button";
 import { useAudio } from "react-use";
 import { cn } from "@/lib/utils";
 import { Card } from "./card";
+import { mainUser } from "@/lib/features/user/user-progress-slice";
 
 export default function Challenge({
     id,
@@ -59,7 +60,7 @@ export default function Challenge({
         if (selectedCardStatus === true) {
             setIsLoading(true);
             try {
-                const res = await axios.post("/api/challengeProgress/", { userId: userProgress.userId, challengeId: id, completed: true });
+                const _res = await axios.post("/api/challengeProgress/", { userId: userProgress.userId, challengeId: id, completed: true });
                 startTransition(() => {
                     correctControls.play();
                     dispatch(setChallengeId(id));
@@ -69,7 +70,16 @@ export default function Challenge({
                     setSelected(undefined);
                 });
             } catch (err) {
-                console.error(err);
+                dispatch(
+                    mainUser({
+                        userId: userProgress.userId,
+                        hearts: Math.min(userProgress.hearts - 1, 5),
+                        userName: userProgress.userName,
+                        userImageSrc: userProgress.userImageSrc,
+                        points: userProgress.points,
+                        activeCourseId: userProgress.activeCourseId,
+                    })
+                );
             }
         } else {
             setIsLoading(true);
