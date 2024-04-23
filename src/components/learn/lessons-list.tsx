@@ -9,8 +9,7 @@ type LessonWithChildren = Lesson & {
     challenges?: (Challenge & { progresses: ChallengeProgress[] })[];
 };
 
-export default async function LessonsList({ lessons }: { lessons: LessonWithChildren[] }) {
-    const user = await auth();
+export default function LessonsList({ lessons }: { lessons: LessonWithChildren[] }) {
 
     const completedLessons = lessons.map((lesson) => {
         if (lesson.challenges?.length === 0) return { ...lesson, completed: false };
