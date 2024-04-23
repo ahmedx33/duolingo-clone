@@ -13,7 +13,6 @@ export default function Practice() {
     const [audio, _, controls] = useAudio({
         src: "/sounds/level-complete.mp3",
     });
-    const [isShowen, setIsShowen] = useState<boolean>(false);
 
     const { userId, hearts, points } = useSelector((state: RootState) => state.userProgress.value);
 
@@ -26,12 +25,6 @@ export default function Practice() {
         };
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
-
-    const isShowenTimeOut = setTimeout(() => {
-        setIsShowen(true);
-    }, 220);
-
-    clearTimeout(isShowenTimeOut);
 
     const updateUserProgress = async () => {
         try {
@@ -51,13 +44,11 @@ export default function Practice() {
             </section>
 
             <footer className="border-gray-200 sm:border-t-2 sm:p-10 absolute bottom-0 left-0 w-full text-right">
-                {isShowen && (
-                    <Link href="/learn">
-                        <Button onClick={updateUserProgress} variant="primaryGreen" className="uppercase font-bold text-white sm:min-w-[150px] sm:max-w-fit p-6">
-                            Continue
-                        </Button>
-                    </Link>
-                )}
+                <Link href="/learn">
+                    <Button onClick={updateUserProgress} variant="primaryGreen" className="uppercase font-bold text-white sm:min-w-[150px] sm:max-w-fit p-6">
+                        Continue
+                    </Button>
+                </Link>
             </footer>
         </main>
     );
