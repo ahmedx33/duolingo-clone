@@ -24,11 +24,11 @@ export default function LessonButton({
     title,
     lessonsCount,
     isCompleted,
-    isActiveLesson
+    isActiveLesson,
 }: Lesson & {
     lessonsCount?: number;
     isCompleted: boolean;
-    isActiveLesson: boolean
+    isActiveLesson: boolean;
 }) {
     const icon = order === lessonsCount ? <FaCrown size={30} /> : <FaStar size={30} />;
     const marginLeft = order % 2 === 0 ? 50 : 0;
@@ -55,7 +55,7 @@ export default function LessonButton({
     //     };
     // }, [challenges.length, currentChallenge, currentProgresses, progresses]);
 
-    console.log()
+    console.log();
 
     return (
         <div
@@ -88,7 +88,7 @@ export default function LessonButton({
                     <DropdownMenu>
                         <DropdownMenuTrigger>
                             <Button size="rounded" className="w-[70px] h-[70px] border-b-8 active:border-b-0 active:border-0 bg-[#58CC02] border-[#46A302] hover:bg-[58CC02] hover:border-[#46A302]">
-                                <div className="text-white">{isCompleted ? <FaCheck size={30} color="white" /> : icon}</div>
+                                <div className="text-white"> {icon}</div>
                             </Button>
                         </DropdownMenuTrigger>
                         <DropdownMenuContent className="bg-[#58CC02] p-[15px] rounded-xl w-[300px]">
@@ -105,7 +105,7 @@ export default function LessonButton({
                 <DropdownMenu>
                     <DropdownMenuTrigger>
                         <Button size="rounded" className="w-[70px] h-[70px] border-b-8 bg-[#e5e5e5] border-[#AFAFAF] hover:bg-[#E5E5E5] hover:border-[#AFAFAF]">
-                            <div className="text-[#AFAFAF]">{icon}</div>
+                            <div className="text-[#AFAFAF]">{isCompleted ? <FaCheck size={30} color="white" /> : icon}</div>
                         </Button>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent className="bg-[#F3F4F6] p-[15px] rounded-xl w-[300px]">
