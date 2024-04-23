@@ -124,7 +124,7 @@ export default function LessonButton({
                                         isCompleted && "text-[#58CC02] bg-white border-[#E5E5E5] hover:bg-[#E5E5E5] hover:border-[#CECECE]  cursor-pointer"
                                     )}
                                 >
-                                    start
+                                   {isCompleted ? "practice" : " start"}
                                 </Button>
                             </Link>
                         </DropdownMenuItem>
