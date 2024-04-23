@@ -22,7 +22,6 @@ export default function LessonsList({ lessons }: { lessons: LessonWithChildren[]
     });
 
     const activeLesson = lessons.find((lesson) => {
-        console.log(lesson)
         return lesson.challenges?.some((challenge) => {
             return challenge.progresses.length === 0;
         });

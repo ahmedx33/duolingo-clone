@@ -1,6 +1,5 @@
 "use client";
 
-import React, { useEffect, useMemo, useState } from "react";
 import { CircularProgressbarWithChildren } from "react-circular-progressbar";
 import { FaStar, FaCrown } from "react-icons/fa";
 import { FaCheck } from "react-icons/fa";
@@ -10,13 +9,7 @@ import { Challenge, ChallengeProgress, Lesson } from "@prisma/client";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import Link from "next/link";
 
-type ChallengeWithChildren = Challenge & {
-    progresses: ChallengeProgress[];
-};
 
-type LessonWithChildren = Lesson & {
-    challenges?: (Challenge & { progresses: ChallengeProgress })[];
-};
 
 export default function LessonButton({
     id,
@@ -24,11 +17,11 @@ export default function LessonButton({
     title,
     lessonsCount,
     isCompleted,
-    isActiveLesson
+    isActiveLesson,
 }: Lesson & {
     lessonsCount?: number;
     isCompleted: boolean;
-    isActiveLesson: boolean
+    isActiveLesson: boolean;
 }) {
     const icon = order === lessonsCount ? <FaCrown size={30} /> : <FaStar size={30} />;
     const marginLeft = order % 2 === 0 ? 50 : 0;
@@ -85,15 +78,21 @@ export default function LessonButton({
                 >
                     <DropdownMenu>
                         <DropdownMenuTrigger>
-                            <Button size="rounded" className="w-[70px] h-[70px] border-b-8 active:border-b-0 active:border-0 bg-[#58CC02] border-[#46A302] hover:bg-[58CC02] hover:border-[#46A302]">
-                                <div className="text-white">{isCompleted ? <FaCheck size={30} color="white" /> : icon}</div>
+                            <Button
+                                size="rounded"
+                                className={cn(
+                                    "w-[70px] h-[70px] border-b-8 active:border-b-0 active:border-0 bg-[#58CC02] border-[#46A302] hover:bg-[58CC02] hover:border-[#46A302]",
+                                    !isActiveLesson && "bg-[#F3F4F6] border-[#AFAFAF] hover:bg-[#E5E5E5] hover:border-[#AFAFAF]"
+                                )}
+                            >
+                                <div className="text-white">{icon}</div>
                             </Button>
                         </DropdownMenuTrigger>
                         <DropdownMenuContent className="bg-[#58CC02] p-[15px] rounded-xl w-[300px]">
-                            <DropdownMenuLabel className="capitalize font-bold text-white text-[1.2rem]">{title}</DropdownMenuLabel>
-                            <DropdownMenuItem className="w-full h-fit p-0 !bg-[#58CC02]">
-                                <Link className="w-full" href={`/lesson/${id}`}>
-                                    <Button className="text-[#58CC02] uppercase font-bold w-full p-5">start</Button>
+                            <DropdownMenuLabel className={cn("capitalize font-bold text-white text-[1.2rem]", !isActiveLesson && "text-[#9CA3B5]")}>{title}</DropdownMenuLabel>
+                            <DropdownMenuItem className={cn("w-full h-fit p-0 !bg-[#58CC02]", !isActiveLesson && "!bg-[#F3F4F6]")}>
+                                <Link className="w-full" href={isActiveLesson ? `/lesson/${id}` : ""}>
+                                    <Button disabled={!isActiveLesson} className={cn("text-[#58CC02] uppercase font-bold w-full p-5", !isActiveLesson && "text-[#F3F4F6] bg-[#B7B7B7] border-[#B7B7B7] hover:border-[#B7B7B7] hover:bg-[#B7B7B7] uppercase font-bold w-full p-5 active:border-b-4 cursor-default")}>start</Button>
                                 </Link>
                             </DropdownMenuItem>
                         </DropdownMenuContent>
@@ -102,15 +101,15 @@ export default function LessonButton({
             ) : (
                 <DropdownMenu>
                     <DropdownMenuTrigger>
-                        <Button size="rounded" className="w-[70px] h-[70px] border-b-8 bg-[#e5e5e5] border-[#AFAFAF] hover:bg-[#E5E5E5] hover:border-[#AFAFAF]">
-                            <div className="text-[#AFAFAF]">{icon}</div>
+                        <Button size="rounded" className="w-[70px] h-[70px] border-b-8 bg-[#58CC02] border-[#46A302] hover:bg-[58CC02] hover:border-[#46A302]">
+                            <div className="text-[#AFAFAF]">{isCompleted && <FaCheck size={30} color="white" />}</div>
                         </Button>
                     </DropdownMenuTrigger>
-                    <DropdownMenuContent className="bg-[#F3F4F6] p-[15px] rounded-xl w-[300px]">
-                        <DropdownMenuLabel className="capitalize font-bold text-[#9CA3B5] text-[1.2rem]">{title}</DropdownMenuLabel>
-                        <DropdownMenuItem disabled className="!bg-[#F3F4F6]">
-                            <Button className="text-[#F3F4F6] bg-[#B7B7B7] border-[#B7B7B7] hover:border-[#B7B7B7] hover:bg-[#B7B7B7] uppercase font-bold w-full p-5 active:border-b-4 cursor-default">
-                                start
+                    <DropdownMenuContent className="bg-[#58CC02]  p-[15px] rounded-xl w-[300px]">
+                        <DropdownMenuLabel className="capitalize font-bold text-white  text-[1.2rem]">{title}</DropdownMenuLabel>
+                        <DropdownMenuItem  className="!bg-[#58CC02]">
+                            <Button className="text-[#58CC02] uppercase font-bold w-full p-5">
+                                {!isActiveLesson ? "practice again" : "start" }
                             </Button>
                         </DropdownMenuItem>
                     </DropdownMenuContent>
