@@ -13,8 +13,7 @@ export default async function Page({ params: { lessonId } }: { params: { lessonI
             userId: userId as string,
         },
     });
-
-    console.log(progresses);
+    
     return (
         <main className="py-14 h-screen">
             <ChallengesList challenges={challenges} progresses={progresses} />

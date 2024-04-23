@@ -38,7 +38,7 @@ export default function LessonButton({
 
     //     const completedChallenges = currentProgresses?.filter((challenge) => challenge.completed);
     //     const isCompleted = currentProgresses?.every((progress) => progress.completed);
-    //     console.log(currentProgresses);
+    // 
 
     //     const challengePercentage = Math.round(completedChallenges?.length / challenges.length) * 100;
 

@@ -23,8 +23,6 @@ export default function ChallengesList({ challenges, progresses }: ChallengesLis
 
     const activeChallenge = challenges[nextActiveChallenge];
 
-    console.log(progresses)
-
     return (
         <main className="mx-auto w-fit mt-[10rem] ">
             {nextActiveChallenge === challenges.length ? (
