@@ -117,14 +117,16 @@ export default function LessonButton({
                     <DropdownMenuContent className={cn("bg-[#F3F4F6] p-[15px] rounded-xl w-[300px]", isCompleted && "bg-[#58CC02]")}>
                         <DropdownMenuLabel className={cn("capitalize font-bold text-[#9CA3B5] text-[1.2rem]", isCompleted && "text-white")}>{title}</DropdownMenuLabel>
                         <DropdownMenuItem disabled={!isCompleted} className={cn("!bg-[#F3F4F6]", isCompleted && "!bg-[#58CC02]")}>
-                            <Button
-                                className={cn(
-                                    "text-[#F3F4F6] bg-[#B7B7B7] border-[#B7B7B7] hover:border-[#B7B7B7] hover:bg-[#B7B7B7] uppercase font-bold w-full p-5 active:border-b-4 cursor-default",
-                                    isCompleted && "text-[#58CC02] bg-white border-[#E5E5E5] hover:bg-[#E5E5E5] hover:border-[#CECECE]  cursor-pointer"
-                                )}
-                            >
-                                start
-                            </Button>
+                            <Link className="w-full" href={isCompleted ? `/lesson/${id}` : ""}>
+                                <Button
+                                    className={cn(
+                                        "text-[#F3F4F6] bg-[#B7B7B7] border-[#B7B7B7] hover:border-[#B7B7B7] hover:bg-[#B7B7B7] uppercase font-bold w-full p-5 active:border-b-4 cursor-default",
+                                        isCompleted && "text-[#58CC02] bg-white border-[#E5E5E5] hover:bg-[#E5E5E5] hover:border-[#CECECE]  cursor-pointer"
+                                    )}
+                                >
+                                    start
+                                </Button>
+                            </Link>
                         </DropdownMenuItem>
                     </DropdownMenuContent>
                 </DropdownMenu>
