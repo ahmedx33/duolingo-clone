@@ -2,19 +2,20 @@
 
 import React, { useEffect, useMemo, useState } from "react";
 import { CircularProgressbarWithChildren } from "react-circular-progressbar";
-import { FaStar, FaCrown } from "react-icons/fa"; // Fixed import statement for FaCrown
+import { FaStar, FaCrown } from "react-icons/fa";
+import { FaCheck } from "react-icons/fa";
 import { Button } from "../ui/button";
 import { cn } from "@/lib/utils";
 import { Challenge, ChallengeProgress, Lesson } from "@prisma/client";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import Link from "next/link";
-import { useSelector } from "react-redux";
-import { RootState } from "@/lib/store";
-import axios from "axios";
-import { Progress } from "@radix-ui/react-progress";
 
 type ChallengeWithChildren = Challenge & {
-    progresses: ChallengeProgress[]
+    progresses: ChallengeProgress[];
+};
+
+type LessonWithChildren = Lesson & {
+    challenges?: (Challenge & { progresses: ChallengeProgress })[];
 };
 
 export default function LessonButton({
@@ -22,65 +23,70 @@ export default function LessonButton({
     order,
     title,
     lessonsCount,
-    challenges,
-    lessons,
+    isCompleted,
+    isActiveLesson
 }: Lesson & {
     lessonsCount?: number;
-    challenges: ChallengeWithChildren[];
-    lessons: Lesson[];
+    isCompleted: boolean;
+    isActiveLesson: boolean
 }) {
-    const [practice,setPractice] = useState<number>(0)
     const icon = order === lessonsCount ? <FaCrown size={30} /> : <FaStar size={30} />;
     const marginLeft = order % 2 === 0 ? 50 : 0;
-    const currentLesson = order === 1;
-    const isLocked = order !== 1
 
+    // const currentChallenge = challenges.find((challenge) => challenge.lessonId === id);
+    // const currentProgresses = progresses.filter((progress) => progress.challengeId === currentChallenge?.id);
 
-    const currentChallenge = challenges.find((challenge) => challenge.lessonId === id)
-    const completedChallengePercentage = useMemo(() => {
-        const completedChallenges = currentChallenge?.progresses.filter((challenge) => challenge.completed)
+    // const challengeStatus = useMemo(() => {
+    //     if (!currentChallenge || !progresses || progresses?.length === 0)
+    //         return {
+    //             percentage: 0,
+    //             isCompleted: false,
+    //         };
 
-        if (completedChallenges?.length === 0) return 0
+    //     const completedChallenges = currentProgresses?.filter((challenge) => challenge.completed);
+    //     const isCompleted = currentProgresses?.every((progress) => progress.completed);
+    //     console.log(currentProgresses);
 
-        const challengePercentage = Math.round( completedChallenges?.length / challenges.length) * 100
+    //     const challengePercentage = Math.round(completedChallenges?.length / challenges.length) * 100;
 
+    //     return {
+    //         percentage: challengePercentage,
+    //         isCompleted,
+    //     };
+    // }, [challenges.length, currentChallenge, currentProgresses, progresses]);
 
-        return Number.isNaN(challengePercentage) ? 0 : challengePercentage
-    }, [challenges.length, currentChallenge?.progresses])
-   
     return (
         <div
-            className={cn("w-[100px] h-[100px] relative")}
+            className={cn("w-[100px] h-fit relative")}
             style={{
                 marginLeft,
             }}
         >
-            {currentLesson && (
+            {isActiveLesson && (
                 <div className="absolute uppercase z-30 bg-white border-[#E5E5E5] border-2 py-2 px-4 rounded-lg -top-5 left-[0.4rem] w-fit flex items-center justify-center animate-bounce text-[#58CC02] font-bold ">
                     Start
                     <div className="absolute -bottom-[20px] border-[10px] border-transparent border-t-white"></div>
                 </div>
             )}
 
-            { order === 1 ? (
+            {isActiveLesson ? (
                 <CircularProgressbarWithChildren
-                    value={completedChallengePercentage }
+                    value={0}
                     styles={{
                         path: {
                             stroke: "#58CC02",
                             strokeLinecap: "round",
-                            borderRadius: "50%"
+                            borderRadius: "50%",
                         },
                         trail: {
                             stroke: "#E5E5E5",
                         },
-                        
                     }}
                 >
                     <DropdownMenu>
                         <DropdownMenuTrigger>
                             <Button size="rounded" className="w-[70px] h-[70px] border-b-8 active:border-b-0 active:border-0 bg-[#58CC02] border-[#46A302] hover:bg-[58CC02] hover:border-[#46A302]">
-                                <div className="text-white">{icon}</div>
+                                <div className="text-white">{isCompleted ? <FaCheck size={30} color="white" /> : icon}</div>
                             </Button>
                         </DropdownMenuTrigger>
                         <DropdownMenuContent className="bg-[#58CC02] p-[15px] rounded-xl w-[300px]">
@@ -95,7 +101,7 @@ export default function LessonButton({
                 </CircularProgressbarWithChildren>
             ) : (
                 <DropdownMenu>
-                    <DropdownMenuTrigger> 
+                    <DropdownMenuTrigger>
                         <Button size="rounded" className="w-[70px] h-[70px] border-b-8 bg-[#e5e5e5] border-[#AFAFAF] hover:bg-[#E5E5E5] hover:border-[#AFAFAF]">
                             <div className="text-[#AFAFAF]">{icon}</div>
                         </Button>

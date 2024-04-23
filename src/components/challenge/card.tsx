@@ -1,6 +1,6 @@
 "use client";
 
-import { getChallengeOption } from "@/db/challenge";
+import { getChallengeOption } from "@/db/queries/queries";
 import { ChallengeOption as ChallengeOptionType } from "@prisma/client";
 import { Button } from "../ui/button";
 import Image from "next/image";
@@ -28,7 +28,6 @@ export function Card({ id, type, text, imageSrc, correct, setSelected, isSelecte
         setSelected(id);
         setSelectedCardStatus(correct);
     };
-
 
     useKey(String(keys), selectHandler, { event: "keydown" });
 

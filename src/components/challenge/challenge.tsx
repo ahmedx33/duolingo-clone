@@ -29,6 +29,7 @@ export default function Challenge({
     setNextActiveChallenge,
     challenges,
     options,
+    progresses
   
 }: ChallengeWithChildren & {
     setNextActiveChallenge: Dispatch<SetStateAction<number>>;
@@ -48,8 +49,6 @@ export default function Challenge({
     const [wrong, s, wrongControls] = useAudio({
         src: "/sounds/duolingo-wrong.mp3",
     });
-
-    console.log(options);
 
     const { userId, hearts, points, userName, userImageSrc , activeCourseId} = useSelector((state: RootState) => state.userProgress.value);
     const dispatch = useDispatch();

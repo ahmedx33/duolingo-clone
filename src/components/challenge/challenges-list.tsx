@@ -11,17 +11,20 @@ export type ChallengeWithChildren = ChallengeType & {
 
 interface ChallengesListProps {
     challenges: ChallengeWithChildren[];
+    progresses: ChallengeProgress[]
 }
 
-export default function ChallengesList({ challenges }: ChallengesListProps) {
+export default function ChallengesList({ challenges, progresses }: ChallengesListProps) {
     const [nextActiveChallenge, setNextActiveChallenge] = useState<number>(0);
 
     const notCompletedChallenges = challenges.map((challenge) => {
-        return challenges.length
+        return challenges.length;
     });
 
-    console.log(notCompletedChallenges);
     const activeChallenge = challenges[nextActiveChallenge];
+
+    console.log(progresses)
+
     return (
         <main className="mx-auto w-fit mt-[10rem] ">
             {nextActiveChallenge === challenges.length ? (

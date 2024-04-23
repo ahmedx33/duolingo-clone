@@ -4,8 +4,13 @@ import { Button } from "../ui/button";
 import { FaBook } from "react-icons/fa";
 
 import LessonsList from "@/components/learn/lessons-list";
+import { unstable_cache } from "next/cache";
+import { prisma } from "@/db/db";
+import { cache } from "react";
+
 
 export default function Unit({
+    id,
     title,
     description,
     lessons,
@@ -22,7 +27,6 @@ export default function Unit({
                 <Button className="uppercase bg-[#58CC02] border-[#46A302] hover:bg-[#58CC02] hover:border-[#4AAB02] text-white font-bold h-12 flex items-center gap-x-3">
                     <FaBook size={20} /> guidebook
                 </Button>
-
             </div>
             <LessonsList lessons={lessons} />
         </main>
