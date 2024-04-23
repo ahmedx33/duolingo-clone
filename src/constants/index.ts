@@ -1,4 +1,4 @@
-export const LINKS = [
+const LINKS = [
     {
         title: "learn",
         path: "/learn",
@@ -20,3 +20,11 @@ export const LINKS = [
         src: "https://d35aaqx5ub95lt.cloudfront.net/vendor/0e58a94dda219766d98c7796b910beee.svg",
     },
 ];
+
+const FLAGS = [
+    "https://ljfujfxjgcubnqfhhlxe.supabase.co/storage/v1/object/public/flags/es.png",
+    "https://ljfujfxjgcubnqfhhlxe.supabase.co/storage/v1/object/public/flags/ar.png"
+]
+
+
+export { LINKS, FLAGS }
