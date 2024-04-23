@@ -104,14 +104,14 @@ export default function LessonButton({
             ) : (
                 <DropdownMenu>
                     <DropdownMenuTrigger>
-                        <Button size="rounded" className="w-[70px] h-[70px] border-b-8 bg-[#e5e5e5] border-[#AFAFAF] hover:bg-[#E5E5E5] hover:border-[#AFAFAF]">
+                        <Button size="rounded" className={cn("w-[70px] h-[70px] border-b-8 bg-[#e5e5e5] border-[#AFAFAF] hover:bg-[#E5E5E5] hover:border-[#AFAFAF]", isCompleted && "bg-[#58CC02] border-[#46A302] hover:bg-[58CC02] hover:border-[#46A302]")}>
                             <div className="text-[#AFAFAF]">{isCompleted ? <FaCheck size={30} color="white" /> : icon}</div>
                         </Button>
                     </DropdownMenuTrigger>
-                    <DropdownMenuContent className="bg-[#F3F4F6] p-[15px] rounded-xl w-[300px]">
-                        <DropdownMenuLabel className="capitalize font-bold text-[#9CA3B5] text-[1.2rem]">{title}</DropdownMenuLabel>
-                        <DropdownMenuItem disabled className="!bg-[#F3F4F6]">
-                            <Button className="text-[#F3F4F6] bg-[#B7B7B7] border-[#B7B7B7] hover:border-[#B7B7B7] hover:bg-[#B7B7B7] uppercase font-bold w-full p-5 active:border-b-4 cursor-default">
+                    <DropdownMenuContent className={cn("bg-[#F3F4F6] p-[15px] rounded-xl w-[300px]", isCompleted && "bg-[#58CC02]")}>
+                        <DropdownMenuLabel className={cn("capitalize font-bold text-[#9CA3B5] text-[1.2rem]", isCompleted && "text-white")}>{title}</DropdownMenuLabel>
+                        <DropdownMenuItem disabled={!isCompleted} className={cn("!bg-[#F3F4F6]", isCompleted && "!bg-[#58CC02]")}>
+                            <Button className={cn("text-[#F3F4F6] bg-[#B7B7B7] border-[#B7B7B7] hover:border-[#B7B7B7] hover:bg-[#B7B7B7] uppercase font-bold w-full p-5 active:border-b-4 cursor-default", isCompleted && "text-[#58CC02] uppercase font-bold w-full p-5")}>
                                 start
                             </Button>
                         </DropdownMenuItem>
