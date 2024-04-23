@@ -31,6 +31,24 @@ export const getChallengeOption = unstable_cache(cache(async () => {
     return data
 }), ["getChallengeOption"])
 
+
+export const getChallengeProgresses = unstable_cache(cache(async ({ userId }: { userId: string }) => {
+    const data = await prisma.challengeProgress.findMany({
+        where: {
+            userId: userId!,
+        },
+    });
+
+    return data
+}))
+
+
+export const getCourses = unstable_cache(cache(async () => {
+    const data = await prisma.course.findMany();
+
+    return data
+}))
+
 export const getUnits = unstable_cache(cache(async ({ courseId, userId }: { courseId: string, userId: string }) => {
     const data = await prisma.unit.findMany({
         where: {
