@@ -15,10 +15,26 @@ interface MoreOptions {
     selected: string | undefined;
     setSelected: Dispatch<SetStateAction<string | undefined>>;
     setSelectedCardStatus: Dispatch<SetStateAction<boolean | undefined>>;
+    setIsDisabaledCard: boolean;
+    isDisabledCard: boolean;
     isCorrect: boolean | undefined;
 }
 
-export function Card({ id, type, text, imageSrc, correct, setSelected, isSelected, selected, keys, audioSrc, setSelectedCardStatus, isCorrect }: ChallengeOptionType & MoreOptions) {
+export function Card({
+    id,
+    type,
+    text,
+    imageSrc,
+    correct,
+    setSelected,
+    isSelected,
+    selected,
+    keys,
+    audioSrc,
+    setSelectedCardStatus,
+    setIsDisabaledCard,
+    isDisabledCard,
+}: ChallengeOptionType & MoreOptions) {
     const [audio, _, controls] = useAudio({
         src: audioSrc as string,
     });
@@ -35,6 +51,7 @@ export function Card({ id, type, text, imageSrc, correct, setSelected, isSelecte
         <main>
             {audio}
             <Button
+                disabled={isDisabledCard}
                 onClick={selectHandler}
                 className={cn(
                     "flex flex-col items-center gap-y-7 h-[235px] w-[200px] border-2 rounded-xl border-b-4 p-4 lg:p-6 cursor-pointer ",

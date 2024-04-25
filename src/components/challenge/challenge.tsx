@@ -1,6 +1,6 @@
 "use client";
 
-import { Dispatch, SetStateAction, useMemo, useState, useTransition } from "react";
+import { Dispatch, SetStateAction, useEffect, useMemo, useState, useTransition } from "react";
 import { setChallengeId } from "@/lib/features/challenge/challenge-slice";
 import { ChallengeOption, ChallengeProgress, Challenge as ChallengeType } from "@prisma/client";
 import { IoMdClose, IoMdCheckmark } from "react-icons/io";
@@ -19,9 +19,6 @@ import { mainUser } from "@/lib/features/user/user-progress-slice";
 import { toast } from "sonner";
 import { ChallengeWithChildren } from "./challenges-list";
 
-
-
-
 export default function Challenge({
     id,
     type,
@@ -29,8 +26,7 @@ export default function Challenge({
     setNextActiveChallenge,
     challenges,
     options,
-    progresses
-  
+    progresses,
 }: ChallengeWithChildren & {
     setNextActiveChallenge: Dispatch<SetStateAction<number>>;
     lastChallengeIndex: number;
@@ -40,6 +36,7 @@ export default function Challenge({
     const [selectedCardStatus, setSelectedCardStatus] = useState<boolean>();
     const [isCorrect, setIsCorrect] = useState<boolean>();
     const [isLoading, setIsLoading] = useState<boolean>(false);
+    const [isDisabledCard, setIsDisabaledCard] = useState<boolean>(false);
     const [practice, setPractice] = useState<number>(0);
     const [isPending, startTransition] = useTransition();
 
@@ -50,7 +47,7 @@ export default function Challenge({
         src: "/sounds/duolingo-wrong.mp3",
     });
 
-    const { userId, hearts, points, userName, userImageSrc , activeCourseId} = useSelector((state: RootState) => state.userProgress.value);
+    const { userId, hearts, points, userName, userImageSrc, activeCourseId } = useSelector((state: RootState) => state.userProgress.value);
     const dispatch = useDispatch();
     const isDisabled = selected === undefined;
     const splittedQuestion = question?.split('"');
@@ -94,6 +91,16 @@ export default function Challenge({
         }
     };
 
+    useEffect(() => {
+        setIsDisabaledCard(false)
+        
+        if (isCorrect) setIsDisabaledCard(true);
+
+        () => {
+            setIsDisabaledCard(false);
+        };
+    }, [correct, isCorrect]);
+
     return (
         <div>
             {correct}
@@ -124,6 +131,8 @@ export default function Challenge({
                         selected={selected}
                         keys={idx + 1}
                         setSelectedCardStatus={setSelectedCardStatus}
+                        setIsDisabaledCard={isDisabledCard}
+                        isDisabledCard={isDisabledCard}
                         isCorrect={isCorrect}
                     />
                 ))}
