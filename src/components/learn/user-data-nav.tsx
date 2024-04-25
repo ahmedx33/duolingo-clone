@@ -45,9 +45,9 @@ function Header({ courseImageSrc, hearts, points }: HeaderProps) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
     return (
-        <section className="flex  items-center gap-5 mb-7">
+        <section className="flex  items-center gap-7 mb-7">
             <Link href="/courses" className="w-fit h-fit overflow-hidden rounded-md p-3  hover:bg-[#F3F4F6]">
-                <Image className="rounded-md" src={courseImageSrc} alt="course" width={30} height={30} />
+                <Image className="rounded-md" src={courseImageSrc} alt="course" width={36} height={28} />
             </Link>
             <section className="flex items-center gap-x-2 overflow-hidden rounded-md py-2 px-3  hover:bg-[#F3F4F6] cursor-default">
                 <span>
