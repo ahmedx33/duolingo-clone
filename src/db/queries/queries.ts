@@ -1,8 +1,6 @@
-import { revalidatePath, unstable_cache } from "next/cache"
+import { unstable_cache } from "next/cache"
 import { prisma } from "../db"
 import { cache } from "react"
-import { auth } from "@clerk/nextjs"
-
 
 
 export const getChallenges = unstable_cache(cache(async ({ lessonId, userId }: { lessonId: string, userId: string }) => {
