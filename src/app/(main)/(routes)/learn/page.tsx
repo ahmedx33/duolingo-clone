@@ -1,11 +1,11 @@
-import SectionGroup from "@/components/learn/section-group";
+import LearnPageContent from "@/components/learn/learn-page-content";
 
 
 
 export default function Page() {
     return (
         <main className="w-full h-screen">
-            <SectionGroup />
+            <LearnPageContent />
         </main>
     );
 }

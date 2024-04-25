@@ -4,7 +4,7 @@ import { getUnits } from "@/db/queries/queries";
 import { auth } from "@clerk/nextjs";
 import { revalidatePath } from "next/cache";
 
-export default async function SectionGroup() {
+export default async function LearnPageContent() {
     const user = await auth();
     const userProgress = await prisma.userProgress.findUnique({
         where: {

@@ -8,10 +8,6 @@ import { useSelector } from "react-redux";
 import { RootState } from "@/lib/store";
 import Image from "next/image";
 
-interface QuestProgressProps {
-    value: number;
-    totalPoints: number
-}
 
 export default function DailyQuests() {
     const currentUser = useSelector((state: RootState) => state.userProgress.value)
