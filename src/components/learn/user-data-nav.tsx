@@ -45,21 +45,21 @@ function Header({ courseImageSrc, hearts, points }: HeaderProps) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
     return (
-        <section className="flex  items-center gap-x-20 mb-7">
-            <Link href="/courses" className="w-fit h-fit overflow-hidden rounded-md">
-                <Image src={courseImageSrc} alt="course" width={30} height={30} />
+        <section className="flex  items-center gap-5 mb-7">
+            <Link href="/courses" className="w-fit h-fit overflow-hidden rounded-md p-3  hover:bg-[#F3F4F6]">
+                <Image className="rounded-md" src={courseImageSrc} alt="course" width={30} height={30} />
             </Link>
-            <section className="flex items-center gap-x-2">
+            <section className="flex items-center gap-x-2 overflow-hidden rounded-md py-2 px-3  hover:bg-[#F3F4F6] cursor-default">
                 <span>
-                    <RiLightbulbFlashFill color="#1CB0F6" size={25} />
+                <Image src="./svg/exp.svg" alt="exp" height={25} width={25}/>
                 </span>
-                <span className="text-[#1CB0F6]">{points}</span>
+                <span className="text-[#1CB0F6] font-bold">{points}</span>
             </section>
-            <section className="flex items-center gap-x-2">
+            <section className="flex items-center gap-x-2 overflow-hidden rounded-md py-2  px-3 hover:bg-[#F3F4F6] cursor-default">
                 <span>
-                    <TiHeartFullOutline color="#FF4B4B" size={25} />
+                    <Image src="./svg/heart.svg" alt="hearts" height={28} width={28}/>
                 </span>
-                <span className="text-[#FF4B4B]">{hearts}</span>
+                <span className="text-[#FF4B4B] font-bold">{hearts}</span>
             </section>
         </section>
     );

@@ -14,6 +14,7 @@ import { RootState } from "@/lib/store";
 import axios from "axios";
 
 import { FaCheck } from "react-icons/fa6";
+import Spinner from "../spinner";
 
 export function Course({ id, title, imageSrc }: CourseType) {
     const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -39,8 +40,10 @@ export function Course({ id, title, imageSrc }: CourseType) {
         }
     };
 
+    if (isLoading) return <Spinner />
+
     return (
-        <Button disabled={isLoading} onClick={createNewProgress} className="w-[200px] h-[210px] flex flex-col items-center justify-center relative">
+        <Button onClick={createNewProgress} className="w-[200px] h-[210px] flex flex-col items-center justify-center relative">
             {isActive && (
                 <div className="absolute top-[0.7rem] right-[0.7rem] bg-[#58A700] text-white p-1 rounded-md">
                     <FaCheck size={20} />
