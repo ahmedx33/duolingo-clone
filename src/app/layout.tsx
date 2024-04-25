@@ -39,7 +39,7 @@ export default async function RootLayout({
         <ClerkProvider>
             <html lang="en">
                 <StoreProvider>
-                    <body className={`${font.className}`}>
+                    <body className={`${font.className} select-none`}>
                         <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
                             <UserProgerssProvider userProgress={userProgress as UserProgress} />
                             {children}
