@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useMemo, useState } from "react";
+import React, {useMemo, useState } from "react";
 import { CircularProgressbarWithChildren } from "react-circular-progressbar";
 import { FaStar, FaCrown } from "react-icons/fa";
 import { FaCheck } from "react-icons/fa";

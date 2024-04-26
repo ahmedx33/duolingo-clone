@@ -42,8 +42,8 @@ function Header({ courseImageSrc, hearts, points }: HeaderProps) {
 
     useEffect(() => {
         router.refresh()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
+   
+    }, [router])
     return (
         <section className="flex  items-center gap-7 mb-7">
             <Link href="/courses" className="w-fit h-fit overflow-hidden rounded-md p-3  hover:bg-[#F3F4F6]">

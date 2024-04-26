@@ -1,6 +1,6 @@
 "use client";
 
-import { Dispatch, SetStateAction, useEffect, useMemo, useState, useTransition } from "react";
+import { Dispatch, SetStateAction, useEffect, useState, useTransition } from "react";
 import { setChallengeId } from "@/lib/features/challenge/challenge-slice";
 import { ChallengeOption, ChallengeProgress, Challenge as ChallengeType } from "@prisma/client";
 import { IoMdClose, IoMdCheckmark } from "react-icons/io";
