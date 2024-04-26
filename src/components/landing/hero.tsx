@@ -8,7 +8,7 @@ export default function Hero() {
     return (
         <main className="flex items-center justify-center w-full h-full max-lg:flex-col max-lg:mt-[12rem]">
             <section className="max-lg:hidden">
-                <Image src="welcome.svg" alt="welcome" width={500} height={500} draggable={false} />
+                <Image src="/svg/welcome.svg" alt="welcome" width={500} height={500} draggable={false} />
             </section>
             <section className="flex flex-col justify-center items-center gap-y-4 max-lg:h-full">
                 <p className="text-[#4B4B4B] text-3xl font-bold w-[520px] text-center mb-10 max-sm:w-[350px]">The free, fun, and effective way to learn a language!</p>
