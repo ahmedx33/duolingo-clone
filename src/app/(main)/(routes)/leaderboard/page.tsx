@@ -3,7 +3,7 @@ import { LeaderboardHeader } from "@/components/leaderboard/leaderboard-header";
 
 export default function Page() {
     return (
-        <main className="w-full h-screen flex flex-col items-center py-5">
+        <main className="w-full h-screen flex flex-col items-center py-5 ml-[18rem]">
             <LeaderboardHeader />
             <ActiveUsersList />
         </main>
