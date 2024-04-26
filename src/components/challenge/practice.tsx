@@ -23,7 +23,8 @@ export default function Practice() {
             controls.pause();
             controls.seek(0);
         };
-    }, [controls]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     const updateUserProgress = async () => {
         try {
