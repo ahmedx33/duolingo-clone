@@ -1,6 +1,5 @@
-import Sidebar from "@/components/learn/sidebar";
-import UserDataNav from "@/components/learn/user-data-nav";
-import UserProgerssProvider from "@/components/providers/user-progress-provider";
+import Sidebar from "@/layout/sidebar";
+import UserDataNav from "@/layout/user-data-nav";
 import { prisma } from "@/db/db";
 import { currentUser } from "@clerk/nextjs";
 import { Course } from "@prisma/client";
@@ -24,7 +23,7 @@ export default async function layout({ children }: { children: ReactNode }) {
     });
 
     return (
-        <main className="flex items-start overflow-hidden">
+        <main className="flex items-start overflow-x-hidden">
             <Sidebar />
             {children}
             <UserDataNav {...userProgress} activeCourse={activeCourse as Course} />

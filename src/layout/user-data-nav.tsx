@@ -7,8 +7,8 @@ import { useSelector } from "react-redux";
 import { RootState } from "@/lib/store";
 import { Course, UserProgress } from "@prisma/client";
 import Link from "next/link";
-import Upgrade from "./upgrade";
-import DailyQuests from "./daily-quests";
+import Upgrade from "../components/learn/upgrade";
+import DailyQuests from "../components/learn/daily-quests";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 
@@ -29,7 +29,7 @@ export default function UserDataNav({
     activeCourse: Course;
 }) {
     return (
-        <nav className="min-w-[500px] max-w-[500px] h-screen py-9 pr-[12rem] flex items-center flex-col">
+        <nav className="min-w-[500px] max-w-[500px] h-screen py-9 flex items-center flex-col sticky right-0 top-0 bg-white">
             <Header courseImageSrc={activeCourse.imageSrc} hearts={hearts} points={points} />
             <Upgrade />
             <DailyQuests />
