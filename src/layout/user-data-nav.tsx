@@ -29,7 +29,7 @@ export default function UserDataNav({
     activeCourse: Course;
 }) {
     return (
-        <nav className="min-w-[500px] max-w-[500px] h-screen py-9 flex items-center flex-col sticky right-0 top-0 bg-white">
+        <nav className="min-w-[500px] max-w-[500px] h-screen py-9 flex items-center flex-col sticky right-0 top-0">
             <Header courseImageSrc={activeCourse.imageSrc} hearts={hearts} points={points} />
             <Upgrade />
             <DailyQuests />
