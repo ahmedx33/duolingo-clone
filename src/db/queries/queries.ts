@@ -81,3 +81,15 @@ export const getUnits = unstable_cache(cache(async ({ courseId, userId }: { cour
 
     return data
 }), ["lessons"])
+
+
+
+export const getUserProgress = unstable_cache(cache(async () => {
+    const data = await prisma.userProgress.findMany({
+        orderBy: {
+            points: "desc"
+        }
+    })
+
+    return data
+}), ["users", "usersProgress"])
