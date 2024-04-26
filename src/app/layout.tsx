@@ -12,6 +12,8 @@ import UserProgerssProvider from "@/components/providers/user-progress-provider"
 import { prisma } from "@/db/db";
 import { UserProgress } from "@prisma/client";
 
+import { SpeedInsights } from '@vercel/speed-insights/next';
+
 const font = Nunito({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -43,6 +45,7 @@ export default async function RootLayout({
                         <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
                             <UserProgerssProvider userProgress={userProgress as UserProgress} />
                             {children}
+                            <SpeedInsights />
                         </ThemeProvider>
                     </body>
                 </StoreProvider>
