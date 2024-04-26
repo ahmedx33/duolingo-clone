@@ -2,7 +2,7 @@ import Link from "next/link";
 import SidebarLink from "./sidebar-link";
 import { SiDuolingo } from "react-icons/si";
 import { LINKS } from "@/constants";
-import { UserProgress } from "@prisma/client";
+import { UserButton } from "@clerk/nextjs";
 
 export default function Sidebar() {
     return (
@@ -17,6 +17,8 @@ export default function Sidebar() {
                         <SidebarLink title={link.title} path={link.path} src={link.src} />
                     </li>
                 ))}
+
+                <li><UserButton /></li>
             </ul>
         </nav>
     );
