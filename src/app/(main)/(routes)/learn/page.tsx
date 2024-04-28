@@ -4,7 +4,7 @@ const LearnPageContent = dynamic(() => import("@/components/learn/learn-page-con
 
 export default function Page() {
     return (
-        <div className="w-full h-screen ml-64">
+        <div className="w-full h-screen">
             <LearnPageContent />
         </div>
     );

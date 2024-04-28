@@ -19,9 +19,6 @@ interface HeaderProps {
 }
 
 export default function UserDataNav({
-    userId,
-    userName,
-    userImageSrc,
     hearts,
     points,
     activeCourse,
@@ -29,11 +26,11 @@ export default function UserDataNav({
     activeCourse: Course;
 }) {
     return (
-        <nav className="min-w-[500px] max-w-[500px] h-screen py-9 flex items-center flex-col sticky right-0 top-0">
+        <aside className="sticky top-0 hidden w-96 flex-col gap-6 self-start sm:flex">
             <Header courseImageSrc={activeCourse.imageSrc} hearts={hearts} points={points} />
             <Upgrade />
             <DailyQuests />
-        </nav>
+        </aside>
     );
 }
 
@@ -44,7 +41,7 @@ function Header({ courseImageSrc, hearts, points }: HeaderProps) {
         router.refresh();
     }, [router]);
     return (
-        <section className="sticky top-0 w-96 flex-col gap-6 self-start sm:flex h-full">
+        <section className="flex  items-center gap-7 mb-7">
             <Link href="/courses" className="w-fit h-fit overflow-hidden rounded-md p-3  hover:bg-[#F3F4F6]">
                 <Image className="rounded-md" src={courseImageSrc} alt="course" width={36} height={28} />
             </Link>

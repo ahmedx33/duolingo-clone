@@ -23,9 +23,9 @@ export default async function layout({ children }: { children: ReactNode }) {
     });
 
     return (
-        <main className="flex items-start overflow-x-hidden w-full h-full">
+        <main className="fixed inset-0 z-30 flex flex-col bg-white transition duration-300">
             <Sidebar />
-            <article className="flex justify-center gap-3 pt-14 sm:p-6 sm:pt-10 md:ml-24 lg:ml-64 lg:gap-12" >
+            <article className="flex justify-center gap-3 pt-14 sm:p-6 sm:pt-10 md:ml-24 lg:ml-64 lg:gap-12">
                 {children}
                 <UserDataNav {...userProgress} activeCourse={activeCourse as Course} />
             </article>
