@@ -1,4 +1,6 @@
-import LearnPageContent from "@/components/learn/learn-page-content";
+import dynamic from "next/dynamic";
+
+const LearnPageContent = dynamic(() => import("@/components/learn/learn-page-content"));
 
 export default function Page() {
     return (

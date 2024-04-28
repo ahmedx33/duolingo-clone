@@ -3,7 +3,6 @@ import { cn } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { ReactNode } from "react";
 
 interface SiderbarLinkProps {
     title: string;
@@ -15,6 +14,7 @@ export default function SidebarLink({ title, path, src }: SiderbarLinkProps) {
     const pathname = usePathname();
     return (
         <Link
+            prefetch
             href={path}
             className={cn(
                 " bg-transparent p-3 px-2 rounded-xl w-full text-[#777777] uppercase font-bold text-[1rem] flex items-center gap-x-3 max-lg:flex max-lg:items-center max-lg:justify-center hover:bg-[#F1F5F9]",

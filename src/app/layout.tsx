@@ -12,7 +12,7 @@ import UserProgerssProvider from "@/components/providers/user-progress-provider"
 import { prisma } from "@/db/db";
 import { UserProgress } from "@prisma/client";
 
-import { SpeedInsights } from '@vercel/speed-insights/next';
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const font = Nunito({ subsets: ["latin"] });
 
@@ -27,7 +27,7 @@ export default async function RootLayout({
     children: React.ReactNode;
 }>) {
     const user = await currentUser();
-    let userProgress = null 
+    let userProgress = null;
 
     if (user) {
         userProgress = await prisma.userProgress.findUnique({
@@ -42,14 +42,12 @@ export default async function RootLayout({
             <html lang="en">
                 <StoreProvider>
                     <body className={`${font.className} select-none`}>
-                        <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
-                            <UserProgerssProvider userProgress={userProgress as UserProgress} />
-                            {children}
-                            <SpeedInsights />
-                        </ThemeProvider>
+                        <UserProgerssProvider userProgress={userProgress as UserProgress} />
+                        {children}
+                        <SpeedInsights />
+                        <Toaster richColors />
                     </body>
                 </StoreProvider>
-                <Toaster richColors />
             </html>
         </ClerkProvider>
     );
