@@ -41,7 +41,7 @@ export default async function RootLayout({
             <html lang="en">
                 <StoreProvider>
                     <body className={`${font.className} select-none`}>
-                        <UserProgressProvider userProgress={userProgress as UserProgress}>
+                        <UserProgressProvider userProgress={userProgress!}>
                             {children}
                             <SpeedInsights />
                             <Toaster richColors />

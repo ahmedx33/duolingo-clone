@@ -13,7 +13,7 @@ export default function Header() {
             </ClerkLoading>
 
             <ClerkLoaded>
-                <SignInButton>
+                <SignInButton >
                     <UserButton afterSignOutUrl="/" />
                 </SignInButton>
             </ClerkLoaded>

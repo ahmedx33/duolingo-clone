@@ -1,9 +1,8 @@
 import { getChallengeProgresses, getChallenges } from "@/db/queries/queries";
-import { prisma } from "@/db/db";
 import { auth } from "@clerk/nextjs";
-import { lazy } from "react";
+import dynamic from "next/dynamic";
 
-const ChallengesList = lazy(() => import("@/components/challenge/challenges-list"));
+const ChallengesList = dynamic(() => import("@/components/challenge/challenges-list"));
 
 export default async function Page({ params: { lessonId } }: { params: { lessonId: string } }) {
     const { userId } = await auth();

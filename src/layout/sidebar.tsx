@@ -19,7 +19,7 @@ export default function Sidebar() {
                 ))}
 
                 <li>
-                    <UserButton />
+                    <UserButton afterSignOutUrl="/"/>
                 </li>
             </ul>
         </nav>
