@@ -3,12 +3,11 @@ import { Metadata } from "next";
 import { Nunito } from "next/font/google";
 
 import { ClerkProvider, currentUser } from "@clerk/nextjs";
-import { ThemeProvider } from "@/components/theme-provider";
 
 import "./globals.css";
 import { Toaster } from "sonner";
 import StoreProvider from "@/components/providers/store-provider";
-import UserProgerssProvider from "@/components/providers/user-progress-provider";
+import UserProgressProvider from "@/components/providers/user-progress-provider";
 import { prisma } from "@/db/db";
 import { UserProgress } from "@prisma/client";
 
@@ -42,10 +41,11 @@ export default async function RootLayout({
             <html lang="en">
                 <StoreProvider>
                     <body className={`${font.className} select-none`}>
-                        <UserProgerssProvider userProgress={userProgress as UserProgress} />
-                        {children}
-                        <SpeedInsights />
-                        <Toaster richColors />
+                        <UserProgressProvider userProgress={userProgress as UserProgress}>
+                            {children}
+                            <SpeedInsights />
+                            <Toaster richColors />
+                        </UserProgressProvider>
                     </body>
                 </StoreProvider>
             </html>

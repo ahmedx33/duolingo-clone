@@ -2,14 +2,15 @@
 
 import { mainUser } from "@/lib/features/user/user-progress-slice";
 import { UserProgress } from "@prisma/client";
-import { useEffect, useState } from "react";
+import { ReactNode, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 
 interface UserProgerssProviderProps {
+    children?: ReactNode;
     userProgress: UserProgress;
 }
 
-export default function UserProgerssProvider({ userProgress }: UserProgerssProviderProps) {
+export default function UserProgressProvider({ userProgress, children }: UserProgerssProviderProps) {
     const [isMount, setIsMount] = useState<boolean>(false);
     const dispatch = useDispatch();
 
@@ -23,5 +24,5 @@ export default function UserProgerssProvider({ userProgress }: UserProgerssProvi
         };
     }, [dispatch, isMount, userProgress]);
 
-    return null;
+    return <>{children}</>;
 }
