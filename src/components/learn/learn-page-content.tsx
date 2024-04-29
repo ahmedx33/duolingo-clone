@@ -3,6 +3,7 @@ import { prisma } from "@/db/db";
 import { getUnits } from "@/db/queries/queries";
 import { auth } from "@clerk/nextjs";
 import { revalidatePath } from "next/cache";
+import { BottomLinks } from "./bottom-links";
 
 export default async function LearnPageContent() {
     const user = await auth();
