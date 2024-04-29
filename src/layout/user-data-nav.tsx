@@ -12,7 +12,7 @@ import DailyQuests from "../components/learn/daily-quests";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 
-interface HeaderProps {
+export interface HeaderProps {
     courseImageSrc: string;
     hearts: number;
     points: number;
@@ -26,7 +26,7 @@ export default function UserDataNav({
     activeCourse: Course;
 }) {
     return (
-        <aside className="sticky top-0 hidden w-96 flex-col gap-6 self-start sm:flex">
+        <aside className="sticky top-0 flex w-96 flex-col gap-6 self-start max-md:hidden">
             <Header courseImageSrc={activeCourse.imageSrc} hearts={hearts} points={points} />
             <Upgrade />
             <DailyQuests />
@@ -40,6 +40,7 @@ function Header({ courseImageSrc, hearts, points }: HeaderProps) {
     useEffect(() => {
         router.refresh();
     }, [router]);
+
     return (
         <section className="flex  items-center gap-7 mb-7">
             <Link href="/courses" className="w-fit h-fit overflow-hidden rounded-md p-3  hover:bg-[#F3F4F6]">

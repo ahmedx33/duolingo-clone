@@ -6,7 +6,7 @@ import { Course } from "@prisma/client";
 import { redirect } from "next/navigation";
 import { ReactNode } from "react";
 
-export default async function layout({ children }: { children: ReactNode }) {
+export default async function Layout({ children }: { children: ReactNode }) {
     const user = await currentUser();
     const userProgress = await prisma.userProgress.findUnique({
         where: {
@@ -18,16 +18,16 @@ export default async function layout({ children }: { children: ReactNode }) {
 
     const activeCourse = await prisma.course.findUnique({
         where: {
-            id: userProgress?.activeCourseId as string,
+            id: userProgress?.activeCourseId!,
         },
     });
 
     return (
         <main className="fixed inset-0 z-30 flex flex-col bg-white transition duration-300">
             <Sidebar />
-            <article className="flex justify-center gap-3 pt-14 sm:p-6 sm:pt-10 md:ml-24 lg:ml-64 lg:gap-12">
+            <article className="flex justify-center gap-3 pt-14 max-md:pt-0 md:ml-24 lg:ml-64 lg:gap-12 max-md:p-0">
                 {children}
-                <UserDataNav {...userProgress} activeCourse={activeCourse as Course} />
+                <UserDataNav {...userProgress} activeCourse={activeCourse!} />
             </article>
         </main>
     );

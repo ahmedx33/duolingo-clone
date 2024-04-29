@@ -20,7 +20,7 @@ export default async function LearnPageContent() {
     revalidatePath("/leaderstats");
 
     return (
-        <section className="w-full h-full flex flex-col items-center p-3">
+        <section className="w-full h-full flex flex-col items-center p-3 max-md:p-0">
             {units.map((unit) => (
                 <>
                     <Unit key={unit.title} {...unit} lessons={unit.lessons} />
