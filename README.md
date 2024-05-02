@@ -1,3 +1,8 @@
 # Dulingo Clone
 
-The best clone 
+Made with:
+- Next js
+- React js
+- Tailwind
+- Shadcn
+- Clerk
