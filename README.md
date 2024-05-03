@@ -2,3 +2,4 @@
 
 Made with:
 - Next js
+- React js
