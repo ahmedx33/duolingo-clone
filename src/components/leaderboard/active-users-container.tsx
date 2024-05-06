@@ -11,7 +11,7 @@ interface ActiveUsersContainerProps {
 
 export function ActiveUsersContainer({ activeUsers }: ActiveUsersContainerProps) {
     const [currentPage, setCurrentPage] = useState<number>(1);
-    const usersPerPage = 4
+    const usersPerPage = 3
 
     const lastUsersIndex = currentPage * usersPerPage;
     const firstUsersIndex = lastUsersIndex - usersPerPage;
