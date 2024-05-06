@@ -3,7 +3,7 @@
 import { TiHeartFullOutline } from "react-icons/ti";
 import { Progress } from "@/components/ui/progress";
 
-import { CloseButton } from "./components/close-button";
+import { CloseButton } from "./close-button";
 import { Dispatch, SetStateAction, useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "@/lib/store";

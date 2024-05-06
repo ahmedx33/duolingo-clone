@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { Button } from "../ui/button";
-import Reward from "./components/reward";
+import Reward from "./reward";
 import { useAudio } from "react-use";
 import { useEffect, useState } from "react";
 import axios from "axios";
