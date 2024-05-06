@@ -18,7 +18,7 @@ export default function Sidebar() {
                     </li>
                 ))}
 
-                <li>
+                <li className="w-full p-3 px-2">
                     <UserButton afterSignOutUrl="/"/>
                 </li>
             </ul>
