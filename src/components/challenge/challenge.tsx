@@ -137,13 +137,13 @@ export default function Challenge({
                     />
                 ))}
             </div>
-            <footer className="border-t-2 absolute bottom-0 left-0 w-full p-5 px-40 text-right">
+            <footer className="border-t-2 absolute bottom-0 left-0 w-full p-5 px-40 text-right max-sm:-bottom-[220px] bg-white max-sm:border-none max-sm:px-2">
                 {isDisabled === false ? (
-                    <Button disabled={isLoading} onClick={checkCardStatus} variant="primaryGreen" className={cn("text-white rounded-md w-[110px] h-[44px]", isCorrect ? "hidden" : "")}>
+                    <Button disabled={isLoading} onClick={checkCardStatus} variant="primaryGreen" className={cn("text-white rounded-md w-[110px] h-[44px] max-sm:w-full", isCorrect ? "hidden" : "")}>
                         Check
                     </Button>
                 ) : (
-                    <Button disabled={true} variant="primaryGreen" className={cn("text-white rounded-md w-[110px] h-[44px]", isCorrect ? "hidden" : "")}>
+                    <Button disabled={true} variant="primaryGreen" className={cn("text-white rounded-md w-[110px] h-[44px] max-sm:w-full", isCorrect ? "hidden" : "")}>
                         Check
                     </Button>
                 )}
