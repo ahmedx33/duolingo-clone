@@ -48,13 +48,13 @@ export function Card({
     useKey(String(keys), selectHandler, { event: "keydown" });
 
     return (
-        <main>
+        <>
             {audio}
             <Button
                 disabled={isDisabledCard}
                 onClick={selectHandler}
                 className={cn(
-                    "flex flex-col items-center gap-y-7 h-[235px] w-[200px] border-2 rounded-xl border-b-4 p-4 lg:p-6 cursor-pointer ",
+                    "flex flex-col items-center gap-y-7 h-[235px] lg:w-[200px] border-2 rounded-xl border-b-4 p-4 lg:p-6 cursor-pointer ",
                     isSelected ? "border-sky-300 bg-sky-100 hover:bg-sky-100" : "",
                     type === "SELECT" && "h-fit w-[500px]"
                 )}
@@ -65,6 +65,6 @@ export function Card({
                     <div className={cn("text-[#A3A3A3] border-2 border-[#b1b8c2]  px-2 rounded-lg", isSelected && "border-sky-300 text-sky-500")}>{keys}</div>
                 </div>
             </Button>
-        </main>
+        </>
     );
 }

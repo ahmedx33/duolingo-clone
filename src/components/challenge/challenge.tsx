@@ -120,7 +120,7 @@ export default function Challenge({
 
             <h1 className="text-[2rem] font-semibold text-[#404040] relative -top-[90px]">{type === "SELECT" ? splittedQuestion[0] : question}</h1>
 
-            <div className={cn("flex items-center gap-2", type === "SELECT" && "flex-col")}>
+            <div className={cn("grid grid-cols-2 gap-2 sm:grid-cols-3", type === "SELECT" && "!flex !flex-col")}>
                 {options?.map((challengeOption, idx) => (
                     <Card
                         key={challengeOption.id}

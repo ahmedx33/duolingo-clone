@@ -9,7 +9,7 @@ export default async function Page({ params: { lessonId } }: { params: { lessonI
     const [challenges, progresses] = await Promise.all([getChallenges({ lessonId, userId: userId! }), getChallengeProgresses({ userId: userId! })]);
 
     return (
-        <main className="py-14 h-screen">
+        <main className="py-14 h-screen flex flex-col items-center">
             <ChallengesList challenges={challenges} progresses={progresses} />
         </main>
     );

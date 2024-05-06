@@ -17,10 +17,6 @@ interface ChallengesListProps {
 export default function ChallengesList({ challenges, progresses }: ChallengesListProps) {
     const [nextActiveChallenge, setNextActiveChallenge] = useState<number>(0);
 
-    const notCompletedChallenges = challenges.map((challenge) => {
-        return challenges.length;
-    });
-
     const activeChallenge = challenges[nextActiveChallenge];
 
     return (

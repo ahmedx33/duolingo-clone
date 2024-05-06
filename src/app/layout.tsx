@@ -9,7 +9,6 @@ import { Toaster } from "sonner";
 import StoreProvider from "@/components/providers/store-provider";
 import UserProgressProvider from "@/components/providers/user-progress-provider";
 import { prisma } from "@/db/db";
-import { UserProgress } from "@prisma/client";
 
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
