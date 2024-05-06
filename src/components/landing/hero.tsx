@@ -10,7 +10,7 @@ import { useRouter } from "next/navigation";
 export default function Hero() {
    
     return (
-        <main className="flex items-center justify-center w-full h-full max-lg:flex-col max-lg:mt-[12rem]">
+        <main className="flex items-center justify-center w-full h-full max-lg:flex-col max-lg:mt-[12rem] max-md:mt-[5rem]">
             <section className="max-lg:hidden">
                 <Image src="/svg/welcome.svg" alt="welcome" width={500} height={500} draggable={false} />
             </section>
