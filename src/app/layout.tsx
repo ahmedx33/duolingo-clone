@@ -28,7 +28,7 @@ export default async function RootLayout({
     let userProgress = null;
 
     if (user) {
-        userProgress = await prisma.userProgress.findUnique({
+        userProgress = await prisma.userProgress.findFirst({
             where: {
                 userId: user?.id,
             },
