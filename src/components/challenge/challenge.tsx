@@ -118,9 +118,9 @@ export default function Challenge({
                 </div>
             )}
 
-            <h1 className="text-[2rem] font-semibold text-[#404040] relative -top-[90px]">{type === "SELECT" ? splittedQuestion[0] : question}</h1>
+            <h1 className="text-[2rem] font-semibold text-[#404040] relative -top-[90px] max-sm:px-5 text-center">{type === "SELECT" ? splittedQuestion[0] : question}</h1>
 
-            <div className={cn("grid grid-cols-2 gap-2 sm:grid-cols-3", type === "SELECT" && "!flex !flex-col")}>
+            <div className={cn("grid grid-cols-2 gap-2 sm:grid-cols-3 px-4", type === "SELECT" && "!flex !flex-col")}>
                 {options?.map((challengeOption, idx) => (
                     <Card
                         key={challengeOption.id}
@@ -137,7 +137,7 @@ export default function Challenge({
                     />
                 ))}
             </div>
-            <footer className="border-t-2 absolute bottom-0 left-0 w-full p-5 px-40 text-right max-sm:-bottom-[220px] bg-white max-sm:border-none max-sm:px-2">
+            <footer className="border-t-2 absolute bottom-0 max-sm:-bottom-[257px] left-0 w-full p-5 px-40 text-right bg-white max-sm:border-none max-sm:px-2">
                 {isDisabled === false ? (
                     <Button disabled={isLoading} onClick={checkCardStatus} variant="primaryGreen" className={cn("text-white rounded-md w-[110px] h-[44px] max-sm:w-full", isCorrect ? "hidden" : "")}>
                         Check
