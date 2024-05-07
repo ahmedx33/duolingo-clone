@@ -54,9 +54,10 @@ export function Card({
                 disabled={isDisabledCard}
                 onClick={selectHandler}
                 className={cn(
-                    "flex flex-col items-center gap-y-7 h-[235px] lg:w-[200px] border-2 rounded-xl border-b-4 p-4 lg:p-6 cursor-pointer ",
+                    "flex flex-col items-center gap-y-7 h-[235px] w-[200px] border-2 rounded-xl border-b-4 p-4 lg:p-6 cursor-pointer ",
                     isSelected ? "border-sky-300 bg-sky-100 hover:bg-sky-100" : "",
-                    type === "SELECT" && "h-fit w-[500px]"
+                    type === "SELECT" && "h-fit w-full p-4",
+
                 )}
             >
                 {type === "ASSIST" ? <Image src={imageSrc as string} alt="pic" width={100} height={100} /> : ""}

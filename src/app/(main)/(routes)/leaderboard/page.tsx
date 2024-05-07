@@ -1,13 +1,12 @@
-import { ActiveUsersList } from "@/components/leaderboard/active-users-list";
-import { LeaderboardHeader } from "@/components/leaderboard/leaderboard-header";
-import { BottomLinks } from "@/components/learn/bottom-links";
+
+
+import Loading from "@/app/loading";
+import dynamic from "next/dynamic";
+
+const LeaderboardPageContent = dynamic(() => import("@/components/learn/learn-page-content"), { loading: () => <Loading /> });
 
 export default function Page() {
-    return (
-        <main className="w-full h-screen flex flex-col items-center py-5">
-            <LeaderboardHeader />
-            <ActiveUsersList />
-            <BottomLinks />
-        </main>
-    );
+    return <>
+    <LeaderboardPageContent />
+    </>
 }
