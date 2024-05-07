@@ -31,12 +31,11 @@ export function Course({ id, title, imageSrc }: CourseType) {
     const createNewProgress = async () => {
         try {
             setIsLoading(true);
-            const res = await axios.post(`/api/userProgress/`, { courseId: id });
-        } catch (err) {
-            console.error(err);
-        } finally {
+            await axios.post(`/api/userProgress/`, { courseId: id });
             router.push("/learn");
             setIsLoading(false);
+        } catch (err) {
+            console.error(err);
         }
     };
 
