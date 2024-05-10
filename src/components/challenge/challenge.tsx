@@ -46,7 +46,7 @@ export default function Challenge({
     });
 
     // const { userId, hearts, points, userName, userImageSrc, activeCourseId } = useSelector((state: RootState) => state.userProgress.value);
-    const dispatch = useDispatch();
+    // const dispatch = useDispatch();
     const isDisabled = selected === undefined;
     const splittedQuestion = question?.split('"');
 
@@ -58,7 +58,7 @@ export default function Challenge({
                 const _res = await axios.post("/api/challengeProgress/", { userId: "", challengeId: id, completed: true });
                 startTransition(() => {
                     correctControls.play();
-                    dispatch(setChallengeId(id));
+                    // dispatch(setChallengeId(id));
                     setPractice((prev) => prev + 100 / challenges.length);
                     setIsCorrect(true);
                     setIsLoading(false);
@@ -72,16 +72,16 @@ export default function Challenge({
 
             const _res = await axios.patch("/api/userProgress/", { userId: "", hearts: 5 - 1, points: 10, collectedPoints: 0 });
 
-            dispatch(
-                mainUser({
-                    userId: "userId",
-                    hearts: Math.min(5 - 1, 5),
-                    userName: "userName",
-                    userImageSrc: "userImageSrc",
-                    points: "points",
-                    activeCourseId: "activeCourseId",
-                })
-            );
+            // dispatch(
+            //     mainUser({
+            //         userId: "userId",
+            //         hearts: Math.min(points - 1, 5),
+            //         userName: "userName",
+            //         userImageSrc: "userImageSrc",
+            //         points: "points",
+            //         activeCourseId: "activeCourseId",
+            //     })
+            // );
 
             wrongControls.play();
             setIsLoading(false);
