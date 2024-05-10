@@ -10,7 +10,7 @@ export default function ErrorPage({ error, _reset }: { error: Error; _reset: () 
                 <Image src="/svg/sad.svg" alt="sad" fill />
             </div>
             <div className="flex justify-center flex-col">
-                <h2 className="text-[2rem] font-bold mb-5">Error: {String(error)}</h2>
+                <h2 className="text-[2rem] font-bold mb-5">Error</h2>
                 <p className="text-[#AFAFAF] text-[1.2rem]">Something went wrong!</p>
 
                 <Link href="/learn" className="text-[#777777] font-bold text-[1.5rem]">
