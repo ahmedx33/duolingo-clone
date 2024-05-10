@@ -1,10 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import { RiLightbulbFlashFill } from "react-icons/ri";
-import { TiHeartFullOutline } from "react-icons/ti";
-import { useSelector } from "react-redux";
-import { RootState } from "@/lib/store";
 import { Course, UserProgress } from "@prisma/client";
 import Link from "next/link";
 import Upgrade from "../components/learn/upgrade";

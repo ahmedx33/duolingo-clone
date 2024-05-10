@@ -25,28 +25,24 @@ export default async function RootLayout({
     children: React.ReactNode;
 }>) {
     const user = await currentUser();
-    let userProgress = null;
+    // let userProgress = null;
 
-    if (user) {
-        userProgress = await prisma.userProgress.findFirst({
-            where: {
-                userId: user?.id,
-            },
-        });
-    }
+    // if (user) {
+    //     userProgress = await prisma.userProgress.findFirst({
+    //         where: {
+    //             userId: user?.id,
+    //         },
+    //     });
+    // }
 
     return (
         <ClerkProvider>
             <html lang="en">
-                <StoreProvider>
-                    <body className={`${font.className} select-none`}>
-                        <UserProgressProvider userProgress={userProgress!}>
-                            {children}
-                            <SpeedInsights />
-                            <Toaster richColors />
-                        </UserProgressProvider>
-                    </body>
-                </StoreProvider>
+                <body className={`${font.className} select-none`}>
+                    {children}
+                    <SpeedInsights />
+                    <Toaster richColors />
+                </body>
             </html>
         </ClerkProvider>
     );
