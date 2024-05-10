@@ -32,7 +32,6 @@ export function Course({ id, title, imageSrc }: CourseType) {
         try {
             setIsLoading(true);
             await axios.post(`/api/userProgress/`, { courseId: id });
-            setIsLoading(false);
             return router.push("/learn");
         } catch (err) {
             console.error(err);

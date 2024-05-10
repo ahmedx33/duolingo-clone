@@ -36,14 +36,14 @@ export default async function RootLayout({
     // }
 
     return (
-        <ClerkProvider>
-            <html lang="en">
-                <body className={`${font.className} select-none`}>
+        <html lang="en">
+            <body className={`${font.className} select-none`}>
+                <ClerkProvider>
                     {children}
                     <SpeedInsights />
                     <Toaster richColors />
-                </body>
-            </html>
-        </ClerkProvider>
+                </ClerkProvider>
+            </body>
+        </html>
     );
 }
