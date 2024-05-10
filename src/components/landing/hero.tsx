@@ -25,7 +25,7 @@ export default function Hero() {
                         <RedirectButton>CONTINUE LEARNING</RedirectButton>
                     </SignedIn>
                     <SignedOut>
-                        <SignUpButton  mode="modal" afterSignInUrl="/learn" afterSignUpUrl="/learn">
+                        <SignUpButton redirectUrl="/learn"  mode="modal" afterSignInUrl="/learn" afterSignUpUrl="/learn">
                             <Button className="h-[50px] w-[300px] text-white text-[1rem] font-bold" variant="primaryGreen">
                                 GET STARTED
                             </Button>

@@ -3,15 +3,19 @@ import { prisma } from "@/db/db";
 import { getUnits } from "@/db/queries/queries";
 import { auth } from "@clerk/nextjs";
 import { revalidatePath } from "next/cache";
-import { BottomLinks } from "./bottom-links";
+import { redirect } from "next/navigation";
 
 export default async function LearnPageContent() {
     const user = await auth();
+
+    if (!user) return redirect("/")
+
     const userProgress = await prisma.userProgress.findUnique({
         where: {
             userId: user.userId!,
         },
     });
+
     const units = await getUnits({
         courseId: userProgress?.activeCourseId!,
         userId: user.userId!,

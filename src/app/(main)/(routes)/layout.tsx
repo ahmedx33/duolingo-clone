@@ -14,7 +14,9 @@ export default async function Layout({ children }: { children: ReactNode }) {
         },
     });
 
-    if (!userProgress) return redirect("/courses");
+    if (!user) return redirect("/")
+
+    if (!userProgress) return redirect("/courses")
 
     const activeCourse = await prisma.course.findUnique({
         where: {
