@@ -15,7 +15,7 @@ interface MoreOptions {
     selected: string | undefined;
     setSelected: Dispatch<SetStateAction<string | undefined>>;
     setSelectedCardStatus: Dispatch<SetStateAction<boolean | undefined>>;
-    setIsDisabaledCard: boolean;
+    setIsDisabaledCard?: boolean;
     isDisabledCard: boolean;
     isCorrect: boolean | undefined;
 }
@@ -28,11 +28,9 @@ export function Card({
     correct,
     setSelected,
     isSelected,
-    selected,
     keys,
     audioSrc,
     setSelectedCardStatus,
-    setIsDisabaledCard,
     isDisabledCard,
 }: ChallengeOptionType & MoreOptions) {
     const [audio, _, controls] = useAudio({
@@ -60,7 +58,7 @@ export function Card({
 
                 )}
             >
-                {type === "ASSIST" ? <Image src={imageSrc as string} alt="pic" width={100} height={100} /> : ""}
+                {type === "ASSIST" ? <Image src={imageSrc as string} alt="pic" width={100} height={100} draggable={false} /> : ""}
                 <div className={cn("flex items-center justify-between w-full", type === "SELECT" && "flex-row-reverse")}>
                     <p className={cn("text-[#404040] font-bold text-[1.1rem]", type === "SELECT" && "w-full")}>{text}</p>
                     <div className={cn("text-[#A3A3A3] border-2 border-[#b1b8c2]  px-2 rounded-lg", isSelected && "border-sky-300 text-sky-500")}>{keys}</div>

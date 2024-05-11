@@ -64,6 +64,7 @@ export default function Challenge({
                     setIsCorrect(true);
                     setIsLoading(false);
                     setSelected(undefined);
+                    setIsDisabaledCard(true);
                 });
             } catch (err) {
                 console.error(err);
@@ -87,18 +88,9 @@ export default function Challenge({
             wrongControls.play();
             setIsLoading(false);
             setIsCorrect(false);
+            setIsDisabaledCard(true);
         }
     };
-
-    useEffect(() => {
-        setIsDisabaledCard(false);
-
-        if (isCorrect) setIsDisabaledCard(true);
-
-        () => {
-            setIsDisabaledCard(false);
-        };
-    }, [correct, isCorrect]);
 
     return (
         <div>
@@ -130,7 +122,6 @@ export default function Challenge({
                         selected={selected}
                         keys={idx + 1}
                         setSelectedCardStatus={setSelectedCardStatus}
-                        setIsDisabaledCard={isDisabledCard}
                         isDisabledCard={isDisabledCard}
                         isCorrect={isCorrect}
                     />
@@ -161,6 +152,7 @@ export default function Challenge({
                             onClick={() => {
                                 setIsCorrect(undefined);
                                 setNextActiveChallenge((prev) => prev + 1);
+                                setIsDisabaledCard(false);
                             }}
                         >
                             next
@@ -180,6 +172,7 @@ export default function Challenge({
                             className="text-white w-[150px] h-[46px] text-[1.1rem] font-bold"
                             onClick={() => {
                                 setIsCorrect(undefined);
+                                setIsDisabaledCard(false);
                             }}
                         >
                             Retry
