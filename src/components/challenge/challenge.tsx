@@ -4,7 +4,7 @@ import { Dispatch, SetStateAction, useEffect, useState, useTransition } from "re
 import { setChallengeId } from "@/lib/features/challenge/challenge-slice";
 import { Challenge as ChallengeType } from "@prisma/client";
 import { IoMdClose, IoMdCheckmark } from "react-icons/io";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import ChallengeHeader from "./challenge-header";
 import Image from "next/image";
@@ -16,6 +16,8 @@ import { cn } from "@/lib/utils";
 import { Card } from "./card";
 import { mainUser } from "@/lib/features/user/user-progress-slice";
 import { ChallengeWithChildren } from "./challenges-list";
+import { RootState } from "@/lib/store";
+import { toast } from "sonner";
 
 export default function Challenge({
     id,
@@ -45,20 +47,20 @@ export default function Challenge({
         src: "/sounds/duolingo-wrong.mp3",
     });
 
-    // const { userId, hearts, points, userName, userImageSrc, activeCourseId } = useSelector((state: RootState) => state.userProgress.value);
-    // const dispatch = useDispatch();
+    const { userId, hearts, points, userName, userImageSrc, activeCourseId } = useSelector((state: RootState) => state.userProgress.value);
+    const dispatch = useDispatch();
     const isDisabled = selected === undefined;
     const splittedQuestion = question?.split('"');
 
     const checkCardStatus = async () => {
-        // if (hearts === 0) return toast.error("You have less hearts");
+        if (hearts === 0) return toast.error("You have less hearts");
         if (selectedCardStatus === true) {
             setIsLoading(true);
             try {
                 const _res = await axios.post("/api/challengeProgress/", { userId: "", challengeId: id, completed: true });
                 startTransition(() => {
                     correctControls.play();
-                    // dispatch(setChallengeId(id));
+                    dispatch(setChallengeId(id));
                     setPractice((prev) => prev + 100 / challenges.length);
                     setIsCorrect(true);
                     setIsLoading(false);
@@ -72,16 +74,16 @@ export default function Challenge({
 
             const _res = await axios.patch("/api/userProgress/", { userId: "", hearts: 5 - 1, points: 10, collectedPoints: 0 });
 
-            // dispatch(
-            //     mainUser({
-            //         userId: "userId",
-            //         hearts: Math.min(points - 1, 5),
-            //         userName: "userName",
-            //         userImageSrc: "userImageSrc",
-            //         points: "points",
-            //         activeCourseId: "activeCourseId",
-            //     })
-            // );
+            dispatch(
+                mainUser({
+                    userId,
+                    hearts: Math.min(points - 1, 5),
+                    userName,
+                    userImageSrc,
+                    points,
+                    activeCourseId,
+                })
+            );
 
             wrongControls.play();
             setIsLoading(false);

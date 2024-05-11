@@ -20,13 +20,13 @@ export function Course({ id, title, imageSrc }: CourseType) {
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [isActive, setIsActive] = useState<boolean>(false);
     const router = useRouter();
-    // const userProgress = useSelector((state: RootState) => state.userProgress.value);
+    const userProgress = useSelector((state: RootState) => state.userProgress.value);
 
-    // useEffect(() => {
-    //     if (userProgress) {
-    //         setIsActive(userProgress.activeCourseId === id);
-    //     }
-    // }, [id, userProgress]);
+    useEffect(() => {
+        if (userProgress) {
+            setIsActive(userProgress.activeCourseId === id);
+        }
+    }, [id, userProgress]);
 
     const createNewProgress = async () => {
         try {

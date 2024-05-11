@@ -8,13 +8,14 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import { RootState } from "@/lib/store";
+import { toast } from "sonner";
 
 export default function Practice() {
     const [audio, _, controls] = useAudio({
         src: "/sounds/level-complete.mp3",
     });
 
-    // const { userId, hearts, points } = useSelector((state: RootState) => state.userProgress.value);
+    const { userId, hearts, points } = useSelector((state: RootState) => state.userProgress.value);
 
     useEffect(() => {
         controls.play();
@@ -28,10 +29,11 @@ export default function Practice() {
 
     const updateUserProgress = async () => {
         try {
-            const res = await axios.patch("/api/userProgress/", { userId: "", hearts: 2, points: 10, collectedPoints: 10 });
+            const res = await axios.patch("/api/userProgress/", { userId, hearts, points, collectedPoints: 10 });
             console.log(res);
         } catch (err) {
-            console.log(err);
+            console.error(err);
+            toast.error("Something went wrong!")
         }
     };
 

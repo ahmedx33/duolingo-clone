@@ -7,22 +7,15 @@ import { useDispatch } from "react-redux";
 
 interface UserProgerssProviderProps {
     children?: ReactNode;
-    userProgress: UserProgress;
+    userProgress: UserProgress | null;
 }
 
 export default function UserProgressProvider({ userProgress, children }: UserProgerssProviderProps) {
-    const [isMount, setIsMount] = useState<boolean>(false);
     const dispatch = useDispatch();
 
     useEffect(() => {
-        setIsMount(true);
-
-        if (isMount) dispatch(mainUser(userProgress));
-
-        return () => {
-            setIsMount(false);
-        };
-    }, [dispatch, isMount, userProgress]);
+        dispatch(mainUser(userProgress));
+    }, [dispatch, userProgress]);
 
     return <>{children}</>;
 }
