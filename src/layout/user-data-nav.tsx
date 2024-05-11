@@ -23,7 +23,7 @@ export default function UserDataNav({
 }) {
     return (
         <aside className="sticky top-0 flex w-96 flex-col gap-6 self-start max-md:hidden right-[10px]">
-            <Header courseImageSrc={activeCourse.imageSrc} hearts={hearts} points={points} />
+            <Header courseImageSrc={activeCourse?.imageSrc} hearts={hearts} points={points} />
             <Upgrade />
             <DailyQuests />
         </aside>

@@ -70,7 +70,7 @@ export default function Challenge({
         } else {
             setIsLoading(true);
 
-            const _res = await axios.patch("/api/userProgress/", { userId: "", hearts: 5 - 1, points: 10, collectedPoints: 0 });
+            await axios.patch("/api/userProgress/", { userId, hearts: hearts - 1, points: 10, collectedPoints: 0 });
 
             dispatch(
                 mainUser({
