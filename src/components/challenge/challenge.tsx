@@ -16,6 +16,7 @@ import { mainUser } from "@/lib/features/user/user-progress-slice";
 import { ChallengeWithChildren } from "./challenges-list";
 import { toast } from "sonner";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
+import Spinner from "../spinner";
 
 export default function Challenge({
     id,
@@ -90,8 +91,8 @@ export default function Challenge({
     };
 
     useEffect(() => {
-        setIsDisabaledCard(false)
-        
+        setIsDisabaledCard(false);
+
         if (isCorrect) setIsDisabaledCard(true);
 
         () => {
@@ -138,10 +139,10 @@ export default function Challenge({
             <footer className="border-t-2 absolute bottom-0 max-sm:-bottom-[257px] left-0 w-full p-5 px-40 text-right bg-white max-sm:border-none max-sm:px-2">
                 {isDisabled === false ? (
                     <Button disabled={isLoading} onClick={checkCardStatus} variant="primaryGreen" className={cn("text-white rounded-md w-[110px] h-[44px] max-sm:w-full", isCorrect ? "hidden" : "")}>
-                        Check
+                        {isLoading ? <Spinner /> : "Check"}
                     </Button>
                 ) : (
-                    <Button disabled={true} variant="primaryGreen" className={cn("text-white rounded-md w-[110px] h-[44px] max-sm:w-full", isCorrect ? "hidden" : "")}>
+                    <Button disabled={true} variant="primaryGreen" className={cn("text-white  rounded-md w-[110px] h-[44px] max-sm:w-full", isCorrect ? "hidden" : "")}>
                         Check
                     </Button>
                 )}
