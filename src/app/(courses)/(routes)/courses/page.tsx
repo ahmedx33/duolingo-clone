@@ -5,10 +5,8 @@ import StoreProvider from "@/components/providers/store-provider";
 export default function page() {
     return (
         <main>
-            <StoreProvider>
-                <Header />
-                <CoursesList />
-            </StoreProvider>
+            <Header />
+            <CoursesList />
         </main>
     );
 }

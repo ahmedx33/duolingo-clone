@@ -39,7 +39,7 @@ export default async function RootLayout({
         <html lang="en">
             <body className={`${font.className} select-none`}>
                 <ClerkProvider>
-                    {children}
+                    <StoreProvider>{children}</StoreProvider>
                     <SpeedInsights />
                     <Toaster richColors />
                 </ClerkProvider>

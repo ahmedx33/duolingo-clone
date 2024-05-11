@@ -4,7 +4,7 @@ import { Dispatch, SetStateAction, useEffect, useState, useTransition } from "re
 import { setChallengeId } from "@/lib/features/challenge/challenge-slice";
 import { Challenge as ChallengeType } from "@prisma/client";
 import { IoMdClose, IoMdCheckmark } from "react-icons/io";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 import ChallengeHeader from "./challenge-header";
 import Image from "next/image";
@@ -16,8 +16,8 @@ import { cn } from "@/lib/utils";
 import { Card } from "./card";
 import { mainUser } from "@/lib/features/user/user-progress-slice";
 import { ChallengeWithChildren } from "./challenges-list";
-import { RootState } from "@/lib/store";
 import { toast } from "sonner";
+import { useAppSelector } from "@/lib/hooks";
 
 export default function Challenge({
     id,
@@ -47,7 +47,7 @@ export default function Challenge({
         src: "/sounds/duolingo-wrong.mp3",
     });
 
-    const { userId, hearts, points, userName, userImageSrc, activeCourseId } = useSelector((state: RootState) => state.userProgress.value);
+    const { userId, hearts, points, userName, userImageSrc, activeCourseId } = useAppSelector((state) => state.userProgress.value);
     const dispatch = useDispatch();
     const isDisabled = selected === undefined;
     const splittedQuestion = question?.split('"');
@@ -57,7 +57,7 @@ export default function Challenge({
         if (selectedCardStatus === true) {
             setIsLoading(true);
             try {
-                const _res = await axios.post("/api/challengeProgress/", { userId: "", challengeId: id, completed: true });
+                const _res = await axios.post("/api/challengeProgress/", { userId, challengeId: id, completed: true });
                 startTransition(() => {
                     correctControls.play();
                     dispatch(setChallengeId(id));

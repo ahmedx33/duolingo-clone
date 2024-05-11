@@ -4,13 +4,12 @@ import Link from "next/link";
 
 import { Progress } from "../ui/progress";
 
-import { useSelector } from "react-redux";
-import { RootState } from "@/lib/store";
 import Image from "next/image";
+import { useAppSelector } from "@/lib/hooks";
 
 
 export default function DailyQuests() {
-    const currentUser = useSelector((state: RootState) => state.userProgress.value)
+    const currentUser = useAppSelector((state) => state.userProgress.value)
     const totalPoints = currentUser?.points
 
     return (

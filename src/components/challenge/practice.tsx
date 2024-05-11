@@ -6,16 +6,15 @@ import Reward from "./reward";
 import { useAudio } from "react-use";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { useSelector } from "react-redux";
-import { RootState } from "@/lib/store";
 import { toast } from "sonner";
+import { useAppSelector } from "@/lib/hooks";
 
 export default function Practice() {
     const [audio, _, controls] = useAudio({
         src: "/sounds/level-complete.mp3",
     });
 
-    const { userId, hearts, points } = useSelector((state: RootState) => state.userProgress.value);
+    const { userId, hearts, points } = useAppSelector((state) => state.userProgress.value);
 
     useEffect(() => {
         controls.play();
@@ -24,7 +23,7 @@ export default function Practice() {
             controls.pause();
             controls.seek(0);
         };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const updateUserProgress = async () => {
@@ -33,7 +32,7 @@ export default function Practice() {
             console.log(res);
         } catch (err) {
             console.error(err);
-            toast.error("Something went wrong!")
+            toast.error("Something went wrong!");
         }
     };
 

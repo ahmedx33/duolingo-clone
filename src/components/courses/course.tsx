@@ -8,19 +8,17 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
-import { useSelector } from "react-redux";
-import { RootState } from "@/lib/store";
-
 import axios from "axios";
 
 import { FaCheck } from "react-icons/fa6";
 import Spinner from "../spinner";
+import { useAppSelector } from "@/lib/hooks";
 
 export function Course({ id, title, imageSrc }: CourseType) {
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [isActive, setIsActive] = useState<boolean>(false);
     const router = useRouter();
-    const userProgress = useSelector((state: RootState) => state.userProgress.value);
+    const userProgress = useAppSelector((state) => state.userProgress.value);
 
     useEffect(() => {
         if (userProgress) {

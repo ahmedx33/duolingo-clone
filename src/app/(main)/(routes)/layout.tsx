@@ -29,8 +29,7 @@ export default async function Layout({ children }: { children: ReactNode }) {
         <main className="fixed inset-0 z-30 flex flex-col bg-white transition duration-300">
             <Sidebar />
             <article className="flex justify-center gap-3 pt-14 max-md:pt-0 md:ml-24 lg:ml-64 lg:gap-12 max-md:p-0">
-                <StoreProvider>{children}</StoreProvider>
-                <UserDataNav {...userProgress} activeCourse={activeCourse!} />
+                {children}
             </article>
         </main>
     );
