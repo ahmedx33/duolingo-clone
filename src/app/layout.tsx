@@ -19,21 +19,11 @@ export const metadata: Metadata = {
     description: "Learn and explore any lang!",
 };
 
-export default async function RootLayout({
+export default function RootLayout({
     children,
 }: Readonly<{
     children: React.ReactNode;
 }>) {
-    const user = await currentUser();
-    // let userProgress = null;
-
-    // if (user) {
-    //     userProgress = await prisma.userProgress.findFirst({
-    //         where: {
-    //             userId: user?.id,
-    //         },
-    //     });
-    // }
 
     return (
         <html lang="en">
