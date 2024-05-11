@@ -1,9 +1,9 @@
 "use client";
 
 import { mainUser } from "@/lib/features/user/user-progress-slice";
+import { useAppDispatch } from "@/lib/hooks";
 import { UserProgress } from "@prisma/client";
 import { ReactNode, useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
 
 interface UserProgerssProviderProps {
     children?: ReactNode;
@@ -11,7 +11,7 @@ interface UserProgerssProviderProps {
 }
 
 export default function UserProgressProvider({ userProgress, children }: UserProgerssProviderProps) {
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
 
     useEffect(() => {
         dispatch(mainUser(userProgress));

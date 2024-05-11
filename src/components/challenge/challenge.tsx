@@ -4,8 +4,6 @@ import { Dispatch, SetStateAction, useEffect, useState, useTransition } from "re
 import { setChallengeId } from "@/lib/features/challenge/challenge-slice";
 import { Challenge as ChallengeType } from "@prisma/client";
 import { IoMdClose, IoMdCheckmark } from "react-icons/io";
-import { useDispatch } from "react-redux";
-
 import ChallengeHeader from "./challenge-header";
 import Image from "next/image";
 import axios from "axios";
@@ -17,7 +15,7 @@ import { Card } from "./card";
 import { mainUser } from "@/lib/features/user/user-progress-slice";
 import { ChallengeWithChildren } from "./challenges-list";
 import { toast } from "sonner";
-import { useAppSelector } from "@/lib/hooks";
+import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 
 export default function Challenge({
     id,
@@ -48,7 +46,7 @@ export default function Challenge({
     });
 
     const { userId, hearts, points, userName, userImageSrc, activeCourseId } = useAppSelector((state) => state.userProgress.value);
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
     const isDisabled = selected === undefined;
     const splittedQuestion = question?.split('"');
 
