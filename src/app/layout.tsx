@@ -24,15 +24,16 @@ export default function RootLayout({
 }: Readonly<{
     children: React.ReactNode;
 }>) {
-
     return (
         <html lang="en">
             <body className={`${font.className} select-none`}>
-                <ClerkProvider>
-                    <StoreProvider>{children}</StoreProvider>
-                    <SpeedInsights />
-                    <Toaster richColors />
-                </ClerkProvider>
+                <StoreProvider>
+                    <ClerkProvider>
+                        {children}
+                        <SpeedInsights />
+                        <Toaster richColors />
+                    </ClerkProvider>
+                </StoreProvider>
             </body>
         </html>
     );
