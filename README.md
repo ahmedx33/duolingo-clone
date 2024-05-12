@@ -10,7 +10,7 @@ Made with:
 - Shadcn UI
 
 
-# Screnshots From The App
+# Screenshots From The App
 
 ![setupPage](https://github.com/ahmedx33/duolingo-clone/assets/133010783/ae210ab6-31e8-4b61-8fa1-cde9de721573)
 ![learnPage](https://github.com/ahmedx33/duolingo-clone/assets/133010783/6c7e1696-22d5-44ca-896a-a9590a26a4b2)
