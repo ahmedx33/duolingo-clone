@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export function LeaderboardHeader() {
     return (
-        <div className="p-7 flex items-center flex-col border-b-2 w-full">
+        <div className="p-2 flex items-center flex-col border-b-2 w-full">
             <div>
                 <Image src="/svg/leaderstats.svg" alt="reward" width={91} height={91} />
             </div>
