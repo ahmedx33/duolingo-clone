@@ -2,15 +2,17 @@
 
 import { IoClose } from "react-icons/io5";
 import { useRouter } from "next/navigation";
+import { useAppDispatch, useAppSelector } from "@/lib/hooks";
+import { onOpen } from "@/lib/features/modals/exit-challenge-modal";
 
 
 export function CloseButton() {
-    const router = useRouter();
+    const dispatch = useAppDispatch()
     return (
         <div>
             <IoClose
                 onClick={() => {
-                    router.push("/learn");
+                    dispatch(onOpen())
                 }}
                 size={30}
                 color="#64748A"

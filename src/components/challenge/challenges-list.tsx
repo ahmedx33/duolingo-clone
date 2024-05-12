@@ -3,6 +3,7 @@ import { ChallengeOption, ChallengeProgress, Challenge as ChallengeType } from "
 import Challenge from "./challenge";
 import { useMemo, useState } from "react";
 import Practice from "./practice";
+import { ExitChallengeModal } from "../modals/exit-challenge-modal";
 
 export type ChallengeWithChildren = ChallengeType & {
     options?: ChallengeOption[];
@@ -26,6 +27,9 @@ export default function ChallengesList({ challenges, progresses }: ChallengesLis
             ) : (
                 <Challenge {...activeChallenge} challenges={challenges} setNextActiveChallenge={setNextActiveChallenge} lastChallengeIndex={challenges.length - 1} />
             )}
+
+
+            <ExitChallengeModal />
         </main>
     );
 }

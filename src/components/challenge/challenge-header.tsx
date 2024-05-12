@@ -12,9 +12,11 @@ interface ChallengeHeaderProps {
 
 export default function ChallengeHeader({ practice }: ChallengeHeaderProps) {
     const { hearts } = useAppSelector((state) => state.userProgress.value);
+    
+
     return (
         <nav className="flex items-center w-full mx-auto gap-x-5 absolute top-[70px] left-1/2 right-1/2 -translate-x-1/2 px-4">
-            <CloseButton />
+            <CloseButton  />
             <Progress value={practice} />
             <div className="flex items-center gap-x-2">
                 <TiHeartFullOutline color="#FF4B4B" size={30} />

@@ -2,13 +2,14 @@
 import { configureStore } from '@reduxjs/toolkit'
 import userReducer from "./features/user/user-progress-slice"
 import challengeReducer from './features/challenge/challenge-slice'
-
+import exitChallengeReducer from './features/modals/exit-challenge-modal'
 
 export const makeStore = () => {
     return configureStore({
         reducer: {
             userProgress: userReducer,
-            challengeProgress: challengeReducer
+            challengeProgress: challengeReducer,
+            exitChallengeModal: exitChallengeReducer
         }
     })
 }

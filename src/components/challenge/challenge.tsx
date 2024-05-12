@@ -72,16 +72,16 @@ export default function Challenge({
         } else {
             setIsLoading(true);
 
-            await axios.patch("/api/userProgress/", { userId, hearts: hearts - 1, points: 10, collectedPoints: 0 });
+            const _res = await axios.patch("/api/userProgress/", { userId, hearts: hearts - 1, points, collectedPoints: 0 });
 
             dispatch(
                 mainUser({
-                    userId,
-                    hearts: Math.min(points - 1, 5),
-                    userName,
-                    userImageSrc,
-                    points,
-                    activeCourseId,
+                    userId: userId,
+                    hearts: Math.min(hearts - 1, 5),
+                    userName: userName,
+                    userImageSrc: userImageSrc,
+                    points: points,
+                    activeCourseId: activeCourseId,
                 })
             );
 
