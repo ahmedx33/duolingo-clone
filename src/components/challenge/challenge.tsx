@@ -148,7 +148,7 @@ export default function Challenge({
                         </div>
                         <Button
                             variant="primaryGreen"
-                            className="text-white rounded-md w-[150px] h-[46px] text-[1.1rem] font-bold"
+                            className="text-white w-[150px] h-[46px] text-[1.1rem] font-bold"
                             onClick={() => {
                                 setIsCorrect(undefined);
                                 setNextActiveChallenge((prev) => prev + 1);
