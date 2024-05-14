@@ -15,8 +15,10 @@ export default async function Unit({
     title,
     description,
     lessons,
+    isFirstUnit,
 }: UnitType & {
     lessons: Lesson[];
+    isFirstUnit: boolean;
 }) {
     const user = await currentUser();
     const userProgress = await prisma.userProgress.findUnique({
@@ -25,6 +27,7 @@ export default async function Unit({
         },
     });
 
+    console.log(isFirstUnit)
     if (!userProgress) return redirect("/courses");
 
     const activeCourse = await prisma.course.findUnique({
@@ -35,7 +38,7 @@ export default async function Unit({
 
     return (
         <article className=" w-full mb-7 flex flex-col items-center justify-center pl-[50px] max-md:pl-0">
-            <UserDataMobile {...userProgress} courseImageSrc={activeCourse?.imageSrc!} />
+            {isFirstUnit && <UserDataMobile {...userProgress} courseImageSrc={activeCourse?.imageSrc!} />}
             <header className="w-full h-[100px] bg-[#58CC02] flex items-center justify-between px-3 rounded-xl mb-10 max-md:rounded-none">
                 <section>
                     <h1 className="uppercase text-[#CDEFB3] font-bold">{title}</h1>

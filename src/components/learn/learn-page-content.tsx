@@ -28,7 +28,7 @@ export default async function LearnPageContent() {
         <section className="w-full h-full flex flex-col items-center p-3 max-md:p-0">
             {units.map((unit) => (
                 <>
-                    <Unit key={unit.title} {...unit} lessons={unit.lessons} />
+                    <Unit key={unit.title} {...unit} lessons={unit.lessons} isFirstUnit={units[0].order === unit.order} />
                 </>
             ))}
         </section>

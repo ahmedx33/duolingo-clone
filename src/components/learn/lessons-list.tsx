@@ -30,7 +30,7 @@ export default function LessonsList({ lessons }: { lessons: LessonWithChildren[]
     revalidatePath("/learn");
     revalidatePath("/leaderstats");
     return (
-        <main className="flex w-2xl grow flex-col">
+        <main className="flex w-2xl grow flex-col max-md:mb-[100px]">
             {completedLessons.map((lesson) => (
                 <LessonButton key={lesson.id} {...lesson} lessonsCount={lessons.length} isCompleted={lesson.completed!} isActiveLesson={activeLesson?.id === lesson.id} />
             ))}
