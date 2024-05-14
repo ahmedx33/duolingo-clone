@@ -9,11 +9,11 @@ const LINKS = [
         path: "/leaderboard",
         src: "https://d35aaqx5ub95lt.cloudfront.net/vendor/ca9178510134b4b0893dbac30b6670aa.svg",
     },
-    {
-        title: "quests",
-        path: "/quests",
-        src: "https://d35aaqx5ub95lt.cloudfront.net/vendor/7ef36bae3f9d68fc763d3451b5167836.svg",
-    },
+    // {
+    //     title: "quests",
+    //     path: "/quests",
+    //     src: "https://d35aaqx5ub95lt.cloudfront.net/vendor/7ef36bae3f9d68fc763d3451b5167836.svg",
+    // },
     {
         title: "shop",
         path: "/shop",
