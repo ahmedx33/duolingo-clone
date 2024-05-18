@@ -1,5 +1,6 @@
 "use client";
 
+import { BottomLinks } from "@/components/learn/bottom-links";
 import { Progress } from "@/components/ui/progress";
 import { useAppSelector } from "@/lib/hooks";
 import { getPercentage } from "@/lib/utils";
@@ -10,7 +11,7 @@ export default function Page() {
     const totalPoints = currentUser?.points;
 
     return (
-        <div className="flex items-center justify-center h-full w-full">
+        <div className="flex items-center justify-center h-full w-full max-md:mx-6 max-md:h-screen ">
             <div className="border-[#DDDDDD] border-2 rounded-xl py-3 px-5 flex flex-col   min-fit w-[350px] mb-6 h-fit">
                 <h1 className="mb-4 flex items-center justify-between">
                     <span className="text-[#4B4B4B] font-bold text-[1.1rem] text-center w-full">All Daily Quests</span>
@@ -46,6 +47,8 @@ export default function Page() {
                     </span>
                 </section>
             </div>
+
+            <BottomLinks />
         </div>
     );
 }
