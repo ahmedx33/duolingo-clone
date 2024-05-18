@@ -34,7 +34,7 @@ export const POST = async (req: NextRequest) => {
 
 export const PATCH = async (req: NextRequest) => {
     try {
-        const { userId, hearts, points, collectedPoints } = await req.json()
+        const { userId, hearts, points } = await req.json()
 
         const res = await prisma.userProgress.update({
             where: {
@@ -43,7 +43,7 @@ export const PATCH = async (req: NextRequest) => {
             data: {
                 userId,
                 hearts: Math.min(hearts, 5),
-                points: points + collectedPoints
+                points: points
             }
         })
 

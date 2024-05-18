@@ -7,11 +7,12 @@ import Upgrade from "../components/learn/upgrade";
 import DailyQuests from "../components/learn/daily-quests";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
+import { useAppSelector } from "@/lib/hooks";
 
 export interface HeaderProps {
     courseImageSrc: string;
-    hearts: number;
-    points: number;
+    hearts?: number;
+    points?: number;
 }
 
 export default function UserDataNav({
@@ -23,19 +24,15 @@ export default function UserDataNav({
 }) {
     return (
         <aside className="sticky top-0 flex w-96 flex-col gap-6 self-start max-md:hidden right-[10px]">
-            <Header courseImageSrc={activeCourse?.imageSrc} hearts={hearts} points={points} />
+            <Header courseImageSrc={activeCourse?.imageSrc} />
             <Upgrade />
             <DailyQuests />
         </aside>
     );
 }
 
-function Header({ courseImageSrc, hearts, points }: HeaderProps) {
-    const router = useRouter();
-
-    useEffect(() => {
-        router.refresh();
-    }, [router]);
+function Header({ courseImageSrc }: HeaderProps) {
+    const { hearts, points } = useAppSelector((state) => state.userProgress.value);
 
     return (
         <section className="flex  items-center gap-7 mb-7">

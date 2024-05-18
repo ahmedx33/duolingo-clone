@@ -28,7 +28,7 @@ export default function Practice() {
 
     const updateUserProgress = async () => {
         try {
-            const res = await axios.patch("/api/userProgress/", { userId, hearts, points, collectedPoints: 10 });
+            const res = await axios.patch("/api/userProgress/", { userId, hearts, points: points + 10 });
             console.log(res);
         } catch (err) {
             console.error(err);
