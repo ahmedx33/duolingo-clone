@@ -7,15 +7,16 @@ import { useAudio } from "react-use";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { toast } from "sonner";
-import { useAppSelector } from "@/lib/hooks";
+import { useAppDispatch, useAppSelector } from "@/lib/hooks";
+import { mainUser } from "@/lib/features/user/user-progress-slice";
 
 export default function Practice() {
     const [audio, _, controls] = useAudio({
         src: "/sounds/level-complete.mp3",
     });
 
-    const { userId, hearts, points } = useAppSelector((state) => state.userProgress.value);
-
+    const { userId, hearts, points, activeCourseId, userImageSrc, userName } = useAppSelector((state) => state.userProgress.value);
+    const dispatch = useAppDispatch();
     useEffect(() => {
         controls.play();
 
@@ -27,6 +28,16 @@ export default function Practice() {
     }, []);
 
     const updateUserProgress = async () => {
+        dispatch(
+            mainUser({
+                userId,
+                hearts,
+                points: points + 10,
+                activeCourseId,
+                userImageSrc,
+                userName,
+            })
+        );
         try {
             const res = await axios.patch("/api/userProgress/", { userId, hearts, points: points + 10 });
             console.log(res);

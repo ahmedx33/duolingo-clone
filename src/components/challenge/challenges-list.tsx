@@ -2,7 +2,7 @@
 import { ChallengeOption, ChallengeProgress, Challenge as ChallengeType } from "@prisma/client";
 import Challenge from "./challenge";
 import { useMemo, useState } from "react";
-import Practice from "./practice";
+import Practice from "./win-page";
 import { ExitChallengeModal } from "../modals/exit-challenge-modal";
 
 export type ChallengeWithChildren = ChallengeType & {
